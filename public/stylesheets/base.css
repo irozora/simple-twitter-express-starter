@@ -105,14 +105,23 @@ nav {
 
 .inner-navbar > .option {
   grid-area: option;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'admin user logout';
 }
 
 .inner-navbar > .option > li {
-  margin: 0px 10px;
-  height: 100%;
   display: flex;
-  align-items: center;
+}
+.inner-navbar > .option > li:nth-child(1) {
+  grid-area: admin;
+}
+.inner-navbar > .option > li:nth-child(2) {
+  grid-area: user;
+}
+.inner-navbar > .option > li:nth-child(3) {
+  grid-area: logout;
 }
 
 .inner-navbar > .option > li > a {

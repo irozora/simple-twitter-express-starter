@@ -16,7 +16,8 @@ app.use(express.static('public'))
 app.engine(
   'handlebars',
   handlebars({
-    defaultLayout: 'main'
+    defaultLayout: 'main',
+    helpers: require('./config/handlebars-helpers')
   })
 )
 app.set('view engine', 'handlebars')
@@ -25,6 +26,11 @@ app.use(session({ secret: 'secret', resave: false, saveUninitialized: false }))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(passport.initialize())
 app.use(passport.session())
+
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user
+  next()
+})
 
 app.listen(port, () => {
   db.sequelize.sync()
