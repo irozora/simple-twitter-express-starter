@@ -27,13 +27,6 @@
   font-weight: bold;
 }
 
-.signup-container > .fa-twitter {
-  font-size: 850px;
-  color: #38a1f2;
-  position: fixed;
-  margin-left: 300px;
-}
-
 .signup-container > .signup-box > form > div > label {
   display: block;
   color: #657786;

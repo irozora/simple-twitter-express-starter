@@ -1,4 +1,5 @@
 /* 常用顏色、字體等等*/
+@import url('https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap');
 :root {
   --darkBlue: #3495e0;
   --lightBlue: #38a1f2;
@@ -21,7 +22,7 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
-  background-color: #fff;
+  background-color: #e6ecf0;
 }
 
 * {
@@ -49,8 +50,6 @@ ol {
 a,
 a:hover,
 a:focus {
-  margin: 0px;
-  padding: 0px;
   text-decoration: none;
 }
 
@@ -75,4 +74,65 @@ textarea {
 }
 *:focus {
   outline: none;
+}
+
+/* navbar */
+
+nav {
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+}
+
+.inner-navbar {
+  max-width: 890px;
+  width: 890px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 180px 1fr 270px;
+  grid-template-rows: 48px;
+  grid-template-areas: 'logo . option';
+  color: #66757f;
+}
+
+.inner-navbar > .logo {
+  grid-area: logo;
+  color: inherit;
+  margin: auto;
+  font-size: 20px;
+  font-family: 'Kaushan Script', cursive;
+}
+
+.inner-navbar > .option {
+  grid-area: option;
+  display: flex;
+}
+
+.inner-navbar > .option > li {
+  margin: 0px 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.inner-navbar > .option > li > a {
+  color: inherit;
+  height: inherit;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.inner-navbar > .option > li > a > i {
+  margin-right: 5px;
+}
+
+.inner-navbar > .option > li > a:hover {
+  color: var(--lightBlue);
+  border-bottom: 2px solid var(--lightBlue);
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
 }
