@@ -4,6 +4,8 @@
   --lightBlue: #38a1f2;
   --border: 1px solid #38a1f2;
   --buttonPadding: 10px 30px;
+  --hoverColorDark: #2a77b3;
+  --hoverColorLight: #e4f7fc;
 }
 
 /*Basic Setting*/
@@ -63,4 +65,14 @@ img {
   max-width: 1170px;
   margin: 0 auto;
   position: relative;
+}
+
+input,
+button,
+select,
+textarea {
+  outline: none;
+}
+*:focus {
+  outline: none;
 }
