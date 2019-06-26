@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     'Like',
     {
       UserId: DataTypes.INTEGER,
-      RestaurantId: DataTypes.INTEGER
+      TweetId: DataTypes.INTEGER
     },
     {}
   )
