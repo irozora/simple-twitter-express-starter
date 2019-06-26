@@ -1,0 +1,103 @@
+.signin-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 100vh;
+  grid-template-areas: 'left right';
+}
+
+/* col-left */
+
+.signin-container > .col-left {
+  grid-area: left;
+  background-color: var(--darkBlue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.signin-container > .col-left > ul > li {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 24px;
+  margin: 48px auto;
+  position: relative;
+}
+.signin-container > .col-left > ul > li > i {
+  font-size: 28px;
+  margin-right: 16px;
+}
+
+/* col-right */
+
+.signin-container > .col-right {
+  grid-area: right;
+  grid-area: right;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  width: 350px;
+  margin: auto;
+}
+
+.signin-container > .col-right > .slogan {
+  font-size: 27px;
+  line-height: 32px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.signin-container > .col-right > .slogan > .logo {
+  margin-bottom: 10px;
+}
+
+.signin-container > .col-right > .slogan > .logo > i {
+  color: var(--lightBlue);
+}
+
+.signin-container > .col-right > form {
+  width: -webkit-fill-available;
+}
+
+.signin-container > .col-right > form > div > input {
+  width: -webkit-fill-available;
+  font-size: 14px;
+  height: 36px;
+  border: 1px solid #e6ecf0;
+  padding: 10px;
+  margin: 10px 0px 0px 0px;
+  border-radius: 5px;
+}
+
+.signin-container > .col-right > form > button {
+  width: inherit;
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+  padding: 6px 0px;
+  text-align: center;
+  border: var(--border);
+  color: var(--lightBlue);
+  margin-top: 20px;
+}
+
+.signin-container > .col-right > form > .other-option {
+  width: inherit;
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+  padding: 6px 0px;
+  text-align: center;
+  border: var(--border);
+  background-color: var(--lightBlue);
+  margin-top: 10px;
+}
+
+.signin-container > .col-right > form > .other-option > a {
+  color: #fff;
+}
