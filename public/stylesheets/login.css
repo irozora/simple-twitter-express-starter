@@ -74,6 +74,10 @@
   border-radius: 5px;
 }
 
+.signin-container > .col-right > form > div > input:focus {
+  border: 1px solid #8bc1d8;
+}
+
 .signin-container > .col-right > form > button {
   width: inherit;
   border-radius: 100px;
@@ -86,6 +90,7 @@
   border: var(--border);
   color: var(--lightBlue);
   margin-top: 20px;
+  background-color: #fff;
 }
 
 .signin-container > .col-right > form > a {

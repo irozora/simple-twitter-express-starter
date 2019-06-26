@@ -23,14 +23,20 @@
 
 .signup-container > .signup-box > .signup-title {
   font-size: 24px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   font-weight: bold;
+  font-family: var(--generalWord);
+}
+
+.signup-container > .signup-box > form {
+  margin-top: 15px;
 }
 
 .signup-container > .signup-box > form > div > label {
   display: block;
   color: #657786;
   padding: 2px 0px 0px 10px;
+  width: -webkit-fill-available;
 }
 
 .signup-container > .signup-box > form > .signup-list {
@@ -47,6 +53,10 @@
   padding: 5px 10px;
 }
 
+.signup-container > .signup-box > form > .signup-list > input:focus {
+  border-bottom: 2px solid var(--lightBlue);
+}
+
 .signup-container > .signup-box > form > button {
   width: -webkit-fill-available;
   border-radius: 100px;
@@ -58,6 +68,7 @@
   text-align: center;
   border: var(--border);
   color: var(--lightBlue);
+  background-color: #fff;
 }
 
 .signup-container > .signup-box > form > a {
