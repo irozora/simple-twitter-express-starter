@@ -84,8 +84,10 @@
   margin-top: 20px;
 }
 
-.signin-container > .col-right > form > .other-option {
-  width: inherit;
+.signin-container > .col-right > form > a {
+  color: #fff;
+  display: inline-block;
+  width: 100%;
   border-radius: 100px;
   cursor: pointer;
   font-size: 14px;
@@ -98,6 +100,9 @@
   margin-top: 10px;
 }
 
-.signin-container > .col-right > form > .other-option > a {
-  color: #fff;
+.signin-container > .col-right > form > a:hover {
+  background-color: var(--hoverColorDark);
+}
+.signin-container > .col-right > form > button:hover {
+  background-color: var(--hoverColorLight);
 }

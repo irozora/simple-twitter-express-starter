@@ -1,0 +1,91 @@
+.dark-bg {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.signup-container {
+  height: 100%;
+  display: flex;
+  width: 100%;
+}
+
+.signup-container > .signup-box {
+  width: 500px;
+  margin: auto;
+  position: relative;
+  background-color: #fff;
+  align-items: center;
+  border-radius: 10px;
+  padding: 30px 40px;
+}
+
+.signup-container > .signup-box > .signup-title {
+  font-size: 24px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.signup-container > .fa-twitter {
+  font-size: 850px;
+  color: #38a1f2;
+  position: fixed;
+  margin-left: 300px;
+}
+
+.signup-container > .signup-box > form > div > label {
+  display: block;
+  color: #657786;
+  padding: 2px 0px 0px 10px;
+}
+
+.signup-container > .signup-box > form > .signup-list {
+  background-color: #f5f8fa;
+  margin-bottom: 30px;
+}
+
+.signup-container > .signup-box > form > .signup-list > input {
+  width: -webkit-fill-available;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #657786;
+  font-size: 14px;
+  padding: 5px 10px;
+}
+
+.signup-container > .signup-box > form > button {
+  width: -webkit-fill-available;
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+  padding: 6px 0px;
+  text-align: center;
+  border: var(--border);
+  color: var(--lightBlue);
+}
+
+.signup-container > .signup-box > form > a {
+  color: #fff;
+  display: inline-block;
+  width: 100%;
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+  padding: 6px 0px;
+  text-align: center;
+  border: var(--border);
+  background-color: var(--lightBlue);
+  margin-top: 10px;
+}
+
+.signup-container > .signup-box > form > a:hover {
+  background-color: var(--hoverColorDark);
+}
+.signup-container > .signup-box > form > button:hover {
+  background-color: var(--hoverColorLight);
+}

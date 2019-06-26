@@ -1,0 +1,29 @@
+<div class="signup-container">
+  <i class="fab fa-twitter"></i>
+  <div class="dark-bg">
+  </div>
+  <div class="signup-box">
+    <div class="signup-title"><span>Create Your Account</span></div>
+    <form action="/signup" method="POST">
+      <div class="signup-list">
+        <label for="inputName">Name</label>
+        <input type="text" name="name" class="form-control" required autofocus>
+      </div>
+      <div class="signup-list">
+        <label for="inputEmail">Email</label>
+        <input type="text" name="email" class="form-control" required autofocus>
+      </div>
+      <div class="signup-list">
+        <label for="inputPassword">Password</label>
+        <input type="password" name="password" class="form-control" required>
+      </div>
+      <div class="signup-list">
+        <label for="inputPasswordCheck">Confirm Password</label>
+        <input type="password" name="passwordCheck" class="form-control" required>
+      </div>
+      <button class="signin" type="submit">Sign Up</button>
+      <a class="other-option" href="/signin">Log in</a>
+    </form>
+  </div>
+
+</div>

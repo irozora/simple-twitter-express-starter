@@ -20,6 +20,14 @@ app.set('view engine', 'handlebars')
 app.get('/', (req, res) => {
   res.render('signin')
 })
+app.get('/signin', (req, res) => {
+  res.render('signin')
+})
+
+app.get('/signup', (req, res) => {
+  res.render('signup')
+})
+
 app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
