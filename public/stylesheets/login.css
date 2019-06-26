@@ -3,6 +3,9 @@
   grid-template-columns: 50% 50%;
   grid-template-rows: 100vh;
   grid-template-areas: 'left right';
+  z-index: 10;
+  position: relative;
+  background-color: #fff;
 }
 
 /* col-left */
@@ -54,6 +57,7 @@
 
 .signin-container > .col-right > .slogan > .logo > i {
   color: var(--lightBlue);
+  font-size: 40px;
 }
 
 .signin-container > .col-right > form {

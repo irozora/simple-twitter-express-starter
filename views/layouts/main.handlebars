@@ -13,49 +13,17 @@
 </head>
 
 <body>
-  {{!-- <nav class="navbar navbar-expand-lg fixed-top">
-    <a class="navbar-brand ml-5" href="/">RESTAURANT FORUM</a>
-    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav mr-auto">
-      </ul>
-      {{#if currentUser}}
-      <div class="search">
-        <i class="fas fa-search"></i>
-        <input type="text" class="search-field" placeholder="Search Restaurant">
-        <ul class="suggestions"></ul>
-      </div>
-      {{/if}}
-      <div class="align-items-center d-flex">
-        {{#if currentUser.isAdmin}}
-        <a href="/admin" style="color: white;margin-right: 10px;">Admin</a>
-        {{/if}}
-        {{#if currentUser}}
-        <span style="color: white;margin-right: 10px;">Hi, {{currentUser.name}}</span>
-        <a href="/users/{{currentUser.id}}" style="color: white;margin-right: 10px;">Profile</a>
-        <a href="/logout" class="mr-5"><button class="btn my-2 my-sm-0 logout">LogOut</button></a>
-        {{/if}}
-      </div>
+  <nav>
+    <div class="inner-navbar">
+      <a class="logo" href="/"><i class="fab fa-twitter"></i>Simple Twitter</a>
+      <ul class="option" id="">
+        <li><a href="/admin/tweets"><i class="fas fa-money-check"></i>Admin</a></li>
+        <li> <a href=""><i class="far fa-user-circle"></i>Profile</a></li>
+        <li><a href="/logout" class="logout"><i class="fas fa-sign-out-alt"></i>LogOut</a></li>
     </div>
-  </nav> --}}
-  {{!-- <br />
-  <main role="main">
-    <div class="album py-5">
-      <div class="container">
-        {{#if success_messages}}
-        <div class="alert alert-success" role="alert" style="margin: 30px 0 ;">
-          {{success_messages}}
-        </div>
-        {{/if}}
-        {{#if error_messages}}
-        <div class="alert alert-danger" role="alert" style="margin: 30px 0 ;">
-          {{error_messages}}
-        </div>
-        {{/if}} --}}
-
-        {{{body}}}
-        {{!-- </div>
     </div>
-  </main> --}}
+  </nav>
+  {{{body}}}
 </body>
 
 </html>
