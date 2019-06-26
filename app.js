@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const passport = require('./config/passport')
 const db = require('./models')
+const flash = require('connect-flash')
 
 const app = express()
 const port = 3000
@@ -21,14 +22,16 @@ app.engine(
   })
 )
 app.set('view engine', 'handlebars')
-
+app.use(flash())
 app.use(session({ secret: 'secret', resave: false, saveUninitialized: false }))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(passport.initialize())
 app.use(passport.session())
 
 app.use((req, res, next) => {
-  res.locals.currentUser = req.user
+  res.locals.success_messages = req.flash('success_messages')
+  res.locals.error_messages = req.flash('error_messages')
+  res.locals.currentUser = helpers.getUser(req)
   next()
 })
 

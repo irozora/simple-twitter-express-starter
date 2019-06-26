@@ -1,5 +1,6 @@
 /* 常用顏色、字體等等*/
 @import url('https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Libre+Franklin&display=swap');
 :root {
   --darkBlue: #3495e0;
   --lightBlue: #38a1f2;
@@ -7,6 +8,9 @@
   --buttonPadding: 10px 30px;
   --hoverColorDark: #2a77b3;
   --hoverColorLight: #e4f7fc;
+  --bgColor: #e6ecf0;
+  --generalWord: 'Libre Franklin', sans-serif;
+  --titleWord: 'Kaushan Script', cursive;
 }
 
 /*Basic Setting*/
@@ -22,7 +26,7 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
-  background-color: #e6ecf0;
+  background-color: var(--bgColor);
 }
 
 * {
@@ -76,6 +80,12 @@ textarea {
   outline: none;
 }
 
+.alert-danger {
+  width: 100%;
+  color: red;
+  padding-left: 5px;
+}
+
 /* navbar */
 
 nav {
@@ -100,7 +110,7 @@ nav {
   color: inherit;
   margin: auto;
   font-size: 20px;
-  font-family: 'Kaushan Script', cursive;
+  font-family: var(--titleWord);
 }
 
 .inner-navbar > .option {

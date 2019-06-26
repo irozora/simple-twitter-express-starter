@@ -9,10 +9,12 @@ const userController = {
 
   signUp: async (req, res) => {
     if (req.body.passwordCheck !== req.body.password) {
+      req.flash('error_messages', '您的兩次密碼輸入不相符。')
       return res.redirect('/signup')
     }
     const user = await User.findOne({ where: { email: req.body.email } })
     if (user) {
+      req.flash('error_messages', '這個信箱已經有使用者註冊過了。')
       return res.redirect('/signup')
     }
     const done = await User.create({

@@ -13,8 +13,18 @@ passport.use(
     },
     async (req, username, password, cb) => {
       const user = await User.findOne({ where: { email: username } })
-      if (!user) return cb(null, false)
-      if (!bcrypt.compareSync(password, user.password)) return cb(null, false)
+      if (!user)
+        return cb(
+          null,
+          false,
+          req.flash('error_messages', '帳號或密碼輸入錯誤，請再仔細確認一次。')
+        )
+      if (!bcrypt.compareSync(password, user.password))
+        return cb(
+          null,
+          false,
+          req.flash('error_messages', '帳號或密碼輸入錯誤，請再仔細確認一次。')
+        )
       return cb(null, user)
     }
   )
