@@ -1,6 +1,6 @@
 /* 常用顏色、字體等等*/
 @import url('https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Libre+Franklin&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Libre+Franklin:400,600,700&display=swap');
 :root {
   --darkBlue: #3495e0;
   --lightBlue: #38a1f2;
@@ -9,8 +9,22 @@
   --hoverColorDark: #2a77b3;
   --hoverColorLight: #e4f7fc;
   --bgColor: #e6ecf0;
+  --Grey: #66757f;
   --generalWord: 'Libre Franklin', sans-serif;
   --titleWord: 'Kaushan Script', cursive;
+}
+
+/* 常用按鈕樣式 */
+.Button {
+  background-color: #4ab3f4;
+  color: #fff;
+  border-radius: 100px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 6px 16px;
+  position: relative;
+  line-height: 20px;
 }
 
 /*Basic Setting*/
@@ -27,6 +41,7 @@ body {
   line-height: 1.42857143;
   color: #333;
   background-color: var(--bgColor);
+  font-family: var(--generalWord);
 }
 
 * {
@@ -102,7 +117,7 @@ nav {
   grid-template-columns: 180px 1fr 270px;
   grid-template-rows: 48px;
   grid-template-areas: 'logo . option';
-  color: #66757f;
+  color: var(--Grey);
 }
 
 .inner-navbar > .logo {
@@ -140,6 +155,7 @@ nav {
   display: flex;
   align-items: center;
   padding: 5px;
+  font-size: 15px;
 }
 
 .inner-navbar > .option > li > a > i {

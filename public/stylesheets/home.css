@@ -1,0 +1,151 @@
+.home-page {
+  padding-top: 60px;
+  width: 890px;
+  margin: auto;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 65% 35%;
+  grid-template-areas: 'home-left home-right';
+  grid-gap: 15px;
+  color: #000;
+}
+
+.home-page > .home-col-left {
+  background-color: #fff;
+  grid-area: home-left;
+}
+
+.home-page > .home-col-left > .add-tweets {
+  background-color: #e8f5fd;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  grid-template-rows: 135px;
+  grid-template-areas: 'home-avatar home-tweet';
+}
+
+.home-page > .home-col-left > .add-tweets > .avatar {
+  grid-area: home-avatar;
+  grid-area: home-avatar;
+  padding-left: 24px;
+}
+
+.home-page > .home-col-left > .add-tweets > .avatar > div {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.home-page > .home-col-left > .add-tweets > .tweets-content {
+  grid-area: home-tweet;
+}
+
+.home-page > .home-col-left > .add-tweets > .tweets-content > form {
+  position: relative;
+}
+
+.home-page > .home-col-left > .add-tweets > .tweets-content > form > textarea {
+  resize: none;
+  width: 100%;
+  border: 2px solid #a4d9f9;
+  border-radius: 10px;
+  padding: 8px 40px 8px 8px;
+}
+
+.home-page > .home-col-left > .add-tweets > .tweets-content > form > span {
+  position: absolute;
+  bottom: 48px;
+  right: 10px;
+  color: #66757f;
+}
+
+.bottom-option {
+  margin-top: 5px;
+  text-align: right;
+}
+
+.home-page > .home-col-right {
+  background-color: #fff;
+  grid-area: home-right;
+}
+
+.home-page > .home-col-left > .view-tweets > .individual-tweet {
+  height: 150px;
+  border-bottom: 1px solid #e6ecf0;
+  padding: 15px;
+  display: flex;
+}
+
+.home-page
+  > .home-col-left
+  > .view-tweets
+  > .individual-tweet
+  > .col-left
+  > div {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.home-page > .home-col-left > .view-tweets > .individual-tweet > .col-left {
+  padding-right: 15px;
+}
+
+.home-page
+  > .home-col-left
+  > .view-tweets
+  > .individual-tweet
+  > .col-right
+  > .tweet-info
+  > a {
+  color: #14171a;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.home-page
+  > .home-col-left
+  > .view-tweets
+  > .individual-tweet
+  > .col-right
+  > .tweet-info
+  > span {
+  color: var(--Grey);
+}
+
+.home-page
+  > .home-col-left
+  > .view-tweets
+  > .individual-tweet
+  > .col-right
+  > .reaction {
+  padding-top: 15px;
+  display: flex;
+}
+
+.home-page
+  > .home-col-left
+  > .view-tweets
+  > .individual-tweet
+  > .col-right
+  > .reaction
+  > a {
+  color: var(--lightBlue);
+  margin-right: 25px;
+}
+
+.home-page
+  > .home-col-left
+  > .view-tweets
+  > .individual-tweet
+  > .col-right
+  > .reaction
+  > form
+  > a {
+  color: red;
+  margin-right: 25px;
+}

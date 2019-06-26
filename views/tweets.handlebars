@@ -1,0 +1,51 @@
+<div class="home-page">
+  <div class="home-col-left">
+    <div class="add-tweets">
+      <div class="avatar">
+        <div style="background-image:url(https://picsum.photos/200/300)"></div>
+      </div>
+      <div class="tweets-content">
+        <form action="/tweets" method="POST">
+          <textarea type="text" rows="5" name="tweet" placeholder="花生省魔術？" value="" required>
+          </textarea>
+          <span class="feedback">140</span>
+          <div class="bottom-option">
+
+            <button class="Button">Tweet</button>
+
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="view-tweets">
+      <div class="individual-tweet">
+        <div class="col-left">
+          <div style="background-image:url(https://picsum.photos/200/300)">
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="tweet-info">
+            <a href="">@username</a>
+            <span>．2019-06-26&nbsp;&nbsp;11:19</span>
+          </div>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio qui labore perferendis, maxime praesentium
+            aliquam neque dolorum doloribus, in debitis non dist</p>
+          <div class="reaction">
+            <a href="/tweets/:id/replies"><i class="far fa-comment"></i>&nbsp;&nbsp;3</a>
+            <form action="/tweets/:id/like" method="POST">
+              <a href=""><i class="far fa-heart"></i>&nbsp;&nbsp;51</a>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="individual-tweet"></div>
+
+      <div class="individual-tweet"></div>
+
+    </div>
+  </div>
+  <div class="home-col-right">
+
+  </div>
+</div>
