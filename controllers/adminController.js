@@ -1,11 +1,20 @@
 const db = require('../models')
-const {
-  User,
-  Tweet,
-  Reply
-} = db
+const { User, Tweet, Reply, Followship, Like } = db
 
 const adminController = {
+  getUsers: (req, res) => {
+    return User.findAll({
+      include: [
+        Tweet,
+        { model: User, as: 'Followers' },
+        { model: User, as: 'Followings' },
+        { model: Tweet, as: 'LikedTweets' }
+      ]
+    }).then(users => {
+      users = users.sort((a, b) => b.Tweets.length - a.Tweets.length)
+      res.render('admin/users', { users, users })
+    })
+  },
   getTweets: (req, res) => {
     Tweet.findAll({
       include: [User, {
@@ -13,7 +22,6 @@ const adminController = {
         include: [User]
       }]
     }).then(tweets => {
-
       const tweetsEdit = tweets.map(a => ({
         ...a.dataValues,
         description: a.dataValues.description.substring(0, 20)
@@ -34,4 +42,5 @@ const adminController = {
   }
 }
 
+  
 module.exports = adminController

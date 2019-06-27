@@ -1,0 +1,62 @@
+<div class="list-container">
+  <div class="users-list">
+    <a href="/admin/users"><i class="fas fa-users"></i>Overall Users</a>
+  </div>
+
+  <div class="tweets-list">
+    <a href="/admin/tweets"><i class="fab fa-twitter"></i>Overall Tweets</a>
+  </div>
+</div>
+
+<br />
+<br />
+
+<table class="table">
+  <thead class="thead">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">User Name</th>
+      <th scope="col">Tweets</th>
+      <th scope="col">Followings</th>
+      <th scope="col">Followers</th>
+      <th scope="col">Likes</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {{#each users}}
+    <tr>
+      <th scope="row">{{this.id}}</th>
+      <td>
+        <a href="/user/{{this.id}}/tweets">
+          {{this.name}}
+        </a>
+      </td>
+
+      <td>
+        <a href="/user/{{this.id}}/tweets">
+          {{this.Tweets.length}} Tweets
+        </a>
+      </td>
+
+      <td>
+        <a href="/user/{{this.id}}/following">
+          {{this.Followings.length}} Followings
+        </a>
+      </td>
+
+      <td>
+        <a href="/user/{{this.id}}/follower">
+          {{this.Followers.length}} Followers
+        </a>
+      </td>
+
+      <td>
+        <a href="/user/{{this.id}}/like">
+          {{this.LikedTweets.length}} Likes
+        </a>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

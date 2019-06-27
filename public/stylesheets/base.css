@@ -1,5 +1,7 @@
 /* 常用顏色、字體等等*/
 @import url('https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Libre+Franklin:400,600,700&display=swap');
+
 :root {
   --darkBlue: #3495e0;
   --lightBlue: #38a1f2;
@@ -7,6 +9,62 @@
   --buttonPadding: 10px 30px;
   --hoverColorDark: #2a77b3;
   --hoverColorLight: #e4f7fc;
+  --bgColor: #e6ecf0;
+  --Grey: #66757f;
+  --generalWord: 'Libre Franklin', sans-serif;
+  --titleWord: 'Kaushan Script', cursive;
+}
+
+/* 常用按鈕樣式 */
+.Button-primary {
+  background-color: #4ab3f4;
+  color: #fff;
+  border-radius: 100px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 6px 16px;
+  position: relative;
+  line-height: 20px;
+
+}
+
+.Button-secondary {
+  background-color: #fff;
+  color: #4ab3f4;
+  border: 1px solid #4ab3f4;
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 14px;
+  position: relative;
+  line-height: 20px;
+  width: 95px;
+}
+/*各種尺寸的大頭貼*/
+
+.avatar70px {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.avatar50px {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.avatar40px {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /*Basic Setting*/
@@ -22,7 +80,9 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
-  background-color: #e6ecf0;
+  background-color: var(--bgColor);
+
+  font-family: var(--generalWord);
 }
 
 * {
@@ -76,12 +136,19 @@ textarea {
   outline: none;
 }
 
+.alert-danger {
+  width: 100%;
+  color: red;
+  padding-left: 5px;
+}
+
 /* navbar */
 
 nav {
   position: fixed;
   width: 100%;
   background-color: #fff;
+  z-index: 10;
 }
 
 .inner-navbar {
@@ -92,7 +159,7 @@ nav {
   grid-template-columns: 180px 1fr 270px;
   grid-template-rows: 48px;
   grid-template-areas: 'logo . option';
-  color: #66757f;
+  color: var(--Grey);
 }
 
 .inner-navbar > .logo {
@@ -100,19 +167,28 @@ nav {
   color: inherit;
   margin: auto;
   font-size: 20px;
-  font-family: 'Kaushan Script', cursive;
+  font-family: var(--titleWord);
 }
 
 .inner-navbar > .option {
   grid-area: option;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'admin user logout';
 }
 
 .inner-navbar > .option > li {
-  margin: 0px 10px;
-  height: 100%;
   display: flex;
-  align-items: center;
+}
+.inner-navbar > .option > li:nth-child(1) {
+  grid-area: admin;
+}
+.inner-navbar > .option > li:nth-child(2) {
+  grid-area: user;
+}
+.inner-navbar > .option > li:nth-child(3) {
+  grid-area: logout;
 }
 
 .inner-navbar > .option > li > a {
@@ -121,6 +197,7 @@ nav {
   display: flex;
   align-items: center;
   padding: 5px;
+  font-size: 15px;
 }
 
 .inner-navbar > .option > li > a > i {
