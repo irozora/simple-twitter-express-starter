@@ -1,6 +1,37 @@
 const db = require('../models')
-const { User, Tweet, Reply } = db
+const {
+  User,
+  Tweet,
+  Reply
+} = db
 
-const adminController = {}
+const adminController = {
+  getTweets: (req, res) => {
+    Tweet.findAll({
+      include: [User, {
+        model: Reply,
+        include: [User]
+      }]
+    }).then(tweets => {
+
+      const tweetsEdit = tweets.map(a => ({
+        ...a.dataValues,
+        description: a.dataValues.description.substring(0, 20)
+      }))
+
+      return res.render('admin/tweets', {
+        tweets: tweetsEdit
+      })
+    })
+  },
+
+  deleteTweet: (req, res) => {
+    Tweet.findByPk(req.params.id).then(tweet => {
+      tweet.destroy().then(tweet => {
+        return res.redirect('/admin/tweets')
+      })
+    })
+  }
+}
 
 module.exports = adminController
