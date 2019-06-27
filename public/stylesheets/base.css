@@ -1,6 +1,7 @@
 /* 常用顏色、字體等等*/
 @import url('https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Libre+Franklin:400,600,700&display=swap');
+
 :root {
   --darkBlue: #3495e0;
   --lightBlue: #38a1f2;
@@ -25,6 +26,7 @@
   padding: 6px 16px;
   position: relative;
   line-height: 20px;
+
 }
 
 .Button-secondary {
@@ -79,6 +81,7 @@ body {
   line-height: 1.42857143;
   color: #333;
   background-color: var(--bgColor);
+
   font-family: var(--generalWord);
 }
 
