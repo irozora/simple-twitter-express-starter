@@ -31,11 +31,24 @@
           </div>
           <p>{{this.description}}</p>
           <div class="reaction">
-            <a href="/tweets/{{this.id}}/replies"><i class="far fa-comment"></i>&nbsp;&nbsp;{{this.Replies.length}}</a>
-            <form action="/tweets/{{this.id}}/like" method="POST">
-              <button type="submit"><i class="far fa-heart"></i>&nbsp;&nbsp;{{this.LikedUsers.length}}
-              </button>
-            </form>
+            <a href="/tweets/{{this.id}}/replies">
+              {{#if isReplied}}
+              <i class="fas fa-comment"></i>
+              {{else}}
+              <i class="far fa-comment"></i>
+              {{/if}}
+              &nbsp;&nbsp;{{this.Replies.length}}</a>
+
+
+            {{#if isLiked}}
+            <form action="/tweets/{{this.id}}/unlike" method="POST">
+              <button type="submit"><i class="fas fa-heart"></i>
+                {{else}}
+                <form action="/tweets/{{this.id}}/like" method="POST">
+                  <button type="submit"><i class="far fa-heart"></i>
+                    {{/if}}
+                    &nbsp;&nbsp;{{this.LikedUsers.length}}</button>
+                </form>
           </div>
         </div>
       </div>

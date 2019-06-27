@@ -47,6 +47,25 @@ const userController = {
       })
       return res.send(data)
     })
+  },
+
+  like: (req, res) => {
+    Like.create({
+      UserId: req.user.id,
+      TweetId: req.params.id
+    }).then(like => {
+      return res.redirect('back')
+    })
+  },
+
+  unlike: (req, res) => {
+    Like.findOne({
+      where: { UserId: req.user.id, TweetId: req.params.id }
+    }).then(like => {
+      like.destroy().then(() => {
+        return res.redirect('back')
+      })
+    })
   }
 }
 
