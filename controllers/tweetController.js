@@ -21,8 +21,12 @@ const tweetController = {
 
     const data = tweets.map(t => ({
       ...t.dataValues,
-      description: t.description.substring(0, 100)
+      description: t.description.substring(0, 100),
+      isLiked: t.LikedUsers.map(a => a.id).includes(req.user.id),
+      isReplied: t.Replies.map(b => b.id).includes(req.user.id)
     }))
+
+    console.log(data)
 
     const users = await User.findAll({
       include: [{ model: User, as: 'Followers' }]
