@@ -38,6 +38,15 @@ const userController = {
   logout: (req, res) => {
     req.logout()
     res.redirect('/signin')
+  },
+
+  getUserAPI: (req, res) => {
+    User.findAll().then(data => {
+      data = data.map(user => {
+        return { name: user.name, email: user.email }
+      })
+      return res.send(data)
+    })
   }
 }
 
