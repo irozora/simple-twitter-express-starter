@@ -1,0 +1,37 @@
+<div>
+  {{#each tweets}}
+  <div>
+
+    <div style="width:60% ;margin:auto; border-width:1px;border-style:solid ;padding:5px">
+      From:
+      <a href="/users/{{this.User.id}}/tweets">{{this.User.name}}</a>
+      <div style="float:right">
+        <form action="/admin/tweets/{{this.id}}/delete?_method=DELETE" method="POST">
+
+          <button type="submit">DELETE</button>
+
+        </form>
+      </div>
+      <p>{{this.description}}</p>
+
+    </div>
+
+
+    <div style="width:60% ;margin:auto ;padding:5px">
+      Replies：
+
+      {{#each this.Replies}}
+      <div>
+        <p>{{this.comment}}</p>
+        <p>留言者：<a href="/users/{{this.User.id}}/tweets">{{this.User.name}}</a></p>
+      </div>
+      {{/each}}
+
+
+    </div>
+
+  </div>
+  </br>
+  </br>
+  {{/each}}
+</div>
