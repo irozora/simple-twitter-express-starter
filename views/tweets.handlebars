@@ -2,50 +2,72 @@
   <div class="home-col-left">
     <div class="add-tweets">
       <div class="avatar">
-        <div style="background-image:url(https://picsum.photos/200/300)"></div>
+        <div style="background-image:url({{currentUser.avatar}})" class="avatar40px"></div>
       </div>
       <div class="tweets-content">
         <form action="/tweets" method="POST">
-          <textarea type="text" rows="5" name="tweet" placeholder="花生省魔術？" value="" required>
+          <textarea type="text" rows="4" name="tweet" placeholder="有什麼新鮮事？" value="" required>
           </textarea>
+          <input type="hidden" name="UserId" value="{{currentUser.id}}" />
           <span class="feedback">140</span>
           <div class="bottom-option">
-
-            <button class="Button">Tweet</button>
-
+            <button class="Button-primary">Tweet</button>
           </div>
         </form>
       </div>
     </div>
     <div class="view-tweets">
+      {{#each tweets}}
       <div class="individual-tweet">
         <div class="col-left">
-          <div style="background-image:url(https://picsum.photos/200/300)">
+          <div style="background-image:url({{this.User.avatar}})" class="avatar50px">
           </div>
         </div>
         <div class="col-right">
           <div class="tweet-info">
-            <a href="">@username</a>
-            <span>．2019-06-26&nbsp;&nbsp;11:19</span>
+            <a href="/users/{{this.User.id}}/tweets">@{{this.User.name}}</a>
+            <span>．{{moment this.createAt}}</span>
           </div>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio qui labore perferendis, maxime praesentium
-            aliquam neque dolorum doloribus, in debitis non dist</p>
+          <p>{{this.description}}</p>
           <div class="reaction">
-            <a href="/tweets/:id/replies"><i class="far fa-comment"></i>&nbsp;&nbsp;3</a>
-            <form action="/tweets/:id/like" method="POST">
-              <a href=""><i class="far fa-heart"></i>&nbsp;&nbsp;51</a>
+            <a href="/tweets/{{this.id}}/replies"><i class="far fa-comment"></i>&nbsp;&nbsp;{{this.Replies.length}}</a>
+            <form action="/tweets/{{this.id}}/like" method="POST">
+              <button type="submit"><i class="far fa-heart"></i>&nbsp;&nbsp;{{this.LikedUsers.length}}
+              </button>
             </form>
           </div>
         </div>
       </div>
+      {{/each}}
 
-      <div class="individual-tweet"></div>
-
-      <div class="individual-tweet"></div>
 
     </div>
   </div>
   <div class="home-col-right">
+    <div class="title">Popular&nbsp;<i class="fas fa-fire"></i></div>
+    {{#each popularUser}}
+    <div class="user-list">
+      <div class="col-left">
+        <div style="background-image:url({{this.avatar}})" class="avatar70px">
+        </div>
+      </div>
+      <div class="col-right">
+        <div class="tweet-info">
+          <a href="/users/{{this.id}}/tweets">@{{this.name}}</a>
+        </div>
+        <p>{{this.introduction}}</p>
+        {{#if isFollowed}}
+        <form action="/tweets" method="POST">
+          <button type="submit" class="Button-secondary">Unfollow</button>
+        </form>
+        {{else}}
+        <form action="/tweets" method="POST">
+          <button type="submit" class="Button-secondary">Follow</button>
+        </form>
+        {{/if}}
 
+      </div>
+    </div>
+    {{/each}}
   </div>
 </div>

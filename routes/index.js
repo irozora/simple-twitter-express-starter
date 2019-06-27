@@ -10,13 +10,13 @@ module.exports = (app, passport) => {
   const authenticatedAdmin = (req, res, next) => {
     if (req.isAuthenticated()) {
       if (req.user.role === 'admin') return next()
-      console.log(req.user.role)
       return res.redirect('/')
     }
     res.redirect('/signin')
   }
   app.get('/', authenticated, (req, res) => res.redirect('/tweets'))
   app.get('/tweets', authenticated, tweetController.getTweet)
+  app.post('/tweets', authenticated, tweetController.postTweet)
 
   app.get('/admin/users', authenticatedAdmin, adminController.getUsers)
 
