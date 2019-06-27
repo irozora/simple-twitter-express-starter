@@ -26,8 +26,6 @@ const tweetController = {
       isReplied: t.Replies.map(b => b.id).includes(req.user.id)
     }))
 
-    console.log(data)
-
     const users = await User.findAll({
       include: [{ model: User, as: 'Followers' }]
     })
