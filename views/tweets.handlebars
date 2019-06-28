@@ -6,16 +6,17 @@
       </div>
       <div class="tweets-content">
         <form action="/tweets" method="POST">
-          <textarea type="text" rows="4" name="tweet" placeholder="有什麼新鮮事？" value="" required>
+          <textarea type="text" rows="4" name="tweet" placeholder="有什麼新鮮事？" id="tweetInput" required>
           </textarea>
           <input type="hidden" name="UserId" value="{{currentUser.id}}" />
           <span class="feedback">140</span>
           <div class="bottom-option">
-            <button class="Button-primary">Tweet</button>
+            <button class="Button-primary disabled" id="tweetButton" disabled>Tweet</button>
           </div>
         </form>
       </div>
     </div>
+
     <div class="view-tweets">
       {{#each tweets}}
       <div class="individual-tweet">
@@ -52,10 +53,9 @@
         </div>
       </div>
       {{/each}}
-
-
     </div>
   </div>
+
   <div class="home-col-right">
     <div class="title">Popular&nbsp;<i class="fas fa-fire"></i></div>
     {{#each popularUser}}
@@ -78,9 +78,9 @@
           <button type="submit" class="Button-secondary">Follow</button>
         </form>
         {{/if}}
-
       </div>
     </div>
     {{/each}}
   </div>
 </div>
+<script src="/javascripts/tweet.js"></script>

@@ -3,6 +3,7 @@
   height: 100vh;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.3);
+  z-index: 20;
 }
 
 .signup-container {
@@ -19,6 +20,7 @@
   align-items: center;
   border-radius: 10px;
   padding: 30px 40px;
+  z-index: 30;
 }
 
 .signup-container > .signup-box > .signup-title {
@@ -41,7 +43,6 @@
 
 .signup-container > .signup-box > form > .signup-list {
   background-color: #f5f8fa;
-  margin-bottom: 30px;
 }
 
 .signup-container > .signup-box > form > .signup-list > input {

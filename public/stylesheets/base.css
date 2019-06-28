@@ -26,7 +26,10 @@
   padding: 6px 16px;
   position: relative;
   line-height: 20px;
+}
 
+.Button-primary:hover {
+  background-color: var(--hoverColorDark);
 }
 
 .Button-secondary {
@@ -37,10 +40,13 @@
   cursor: pointer;
   font-size: 16px;
   padding: 4px 14px;
-  position: relative;
-  line-height: 20px;
   width: 95px;
 }
+
+.Button-secondary:hover {
+  background-color: var(--hoverColorLight);
+}
+
 /*各種尺寸的大頭貼*/
 
 .avatar70px {
@@ -65,6 +71,23 @@
   border-radius: 50%;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+/* 常用設定 */
+
+.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.alert {
+  border-bottom: 2px solid red !important;
+}
+
+.message {
+  color: red;
+  background: #fff;
+  height: 35px;
 }
 
 /*Basic Setting*/

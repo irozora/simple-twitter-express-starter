@@ -40,7 +40,15 @@ const userController = {
     res.redirect('/signin')
   },
 
-  like: (req, res) => {
+
+  getUserAPI: (req, res) => {
+    User.findAll().then(data => {
+      data = data.map(user => {
+        return { name: user.name, email: user.email }
+      })
+      return res.send(data)
+
+like: (req, res) => {
     Like.create({
       UserId: req.user.id,
       TweetId: req.params.id

@@ -53,7 +53,7 @@
   position: absolute;
   bottom: 48px;
   right: 10px;
-  color: #66757f;
+  color: var(--Grey);
 }
 
 .bottom-option {
@@ -68,7 +68,7 @@
 
 .home-page > .home-col-left > .view-tweets > .individual-tweet {
   height: 110px;
-  border-bottom: 1px solid #e6ecf0;
+  border-bottom: 1px solid var(--bgColor);
   padding: 10px 15px;
   display: flex;
 }
@@ -178,7 +178,7 @@
   grid-template-columns: 35% 65%;
   grid-template-rows: 115px;
   grid-template-areas: 'user-avatar user-info';
-  border-bottom: 1px solid #e6ecf0;
+  border-bottom: 1px solid var(--bgColor);
   margin-bottom: 15px;
 }
 
