@@ -15,12 +15,16 @@ const adminController = {
       res.render('admin/users', { users, users })
     })
   },
+
   getTweets: (req, res) => {
     Tweet.findAll({
-      include: [User, {
-        model: Reply,
-        include: [User]
-      }]
+      include: [
+        User,
+        {
+          model: Reply,
+          include: [User]
+        }
+      ]
     }).then(tweets => {
       const tweetsEdit = tweets.map(a => ({
         ...a.dataValues,
@@ -42,5 +46,4 @@ const adminController = {
   }
 }
 
-  
 module.exports = adminController
