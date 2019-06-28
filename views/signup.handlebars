@@ -11,23 +11,26 @@
     <form action="/signup" method="POST">
       <div class="signup-list">
         <label for="inputName">Name</label>
-        <input type="text" id="inputName" name="name" class="form-control" required>
+        <input type="text" id="inputName" name="name" required>
         <div class="message"></div>
       </div>
       <div class="signup-list">
         <label for="inputEmail">Email</label>
-        <input type="text" id="inputEmail" name="email" class="form-control" required>
+        <input type="text" id="inputEmail" name="email" required>
         <div class="message"></div>
       </div>
       <div class="signup-list">
         <label for="inputPassword">Password</label>
-        <input type="password" id="inputPassword" name="password" class="form-control" required>
+        <input type="password" id="inputPassword" name="password" required>
         <div class="message"></div>
       </div>
       <div class="signup-list">
         <label for="inputPasswordCheck">Confirm Password</label>
-        <input type="password" id="inputPasswordCheck" name="passwordCheck" class="form-control" required>
+        <input type="password" id="inputPasswordCheck" name="passwordCheck" required>
         <div class="message"></div>
+      </div>
+      <div class="signup-list">
+        <input type="hidden" name="introduction" value="Hi, nice to meet you">
       </div>
       <button class="signin Button-Login-Signup" type="submit">Sign Up</button>
       <a class="Button-Login-Signup" href="/signin">Log in</a>

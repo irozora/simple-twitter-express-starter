@@ -20,7 +20,12 @@ const userController = {
     const done = await User.create({
       name: req.body.name,
       email: req.body.email,
-      password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null)
+      password: bcrypt.hashSync(
+        req.body.password,
+        bcrypt.genSaltSync(10),
+        null
+      ),
+      introduction: req.body.introduction
     })
     if (done) {
       return res.redirect('/signin')
