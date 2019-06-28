@@ -1,0 +1,68 @@
+.following-page {
+  min-width: 800px;
+  max-width: 1080px;
+  padding: 100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 30% 70%;
+  grid-template-areas: 'following-left following-right';
+}
+
+.user-detail {
+  background-color: #fff;
+  grid-area: following-left;
+  height: fit-content;
+  margin-right: 40px;
+  padding: 15px 30px;
+}
+
+.following-list {
+  grid-area: following-right;
+  height: fit-content;
+}
+
+.user-info,
+.user-describe,
+.tweet-amount,
+.following-amount,
+.follower-amount,
+.likes-amount,
+.edit-or-follow {
+  padding: 5px;
+}
+
+.following-list > p {
+  text-transform: uppercase;
+  font-size: 1.7em;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+.following-list > .user-list {
+  background-color: #fff;
+  padding: 15px 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  width: auto;
+}
+
+.following-page > .following-list > .user-list {
+  display: grid;
+
+  grid-template-rows: 1fr;
+  grid-template-columns: 30% 70%;
+  grid-template-areas: 'user-left user-right';
+}
+
+.following-page > .following-list > .user-list > .col-left {
+  grid-area: user-left;
+  height: fit-content;
+}
+
+.following-page > .following-list > .user-list > .col-right {
+  grid-area: user-right;
+}
+
+.following-page > .following-list > .user-list > .col-left > .tweet-info {
+  padding: 5px 5px;
+}

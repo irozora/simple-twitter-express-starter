@@ -66,7 +66,33 @@ const userController = {
         return res.redirect('back')
       })
     })
+  },
+
+  // getFollowingPage的"該使用者的追蹤者是否是自己的追蹤者功能還未完工QQ"
+  getFollowingPage: (req, res) => {
+    return User.findByPk(req.params.id, {
+      include: [
+        Tweet,
+        { model: User, as: 'Followers' },
+        { model: User, as: 'Followings' },
+        { model: Tweet, as: 'LikedTweets' }
+      ]
+    }).then(user => {
+      const isFollowed = user.Followings.map(d => d.id).includes(user.id)
+      const followingList = user.Followings.map(following => ({
+        ...following.dataValues,
+        followedOrNot: req.user.Followings.map(d => d.id).includes(user.id)
+      }))
+      console.log(followingList)
+
+      res.render('followings', {
+        user: user,
+        isFollowed: isFollowed,
+        followingList: followingList
+      })
+    })
   }
 }
 
 module.exports = userController
+// followingList.followedOrNot

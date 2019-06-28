@@ -48,8 +48,8 @@ td {
 }
 
 tbody > tr > th,
-td,
-a {
+tbody > tr > td,
+tbody > tr > a {
   color: white;
   font-size: 18px;
   transition: 0.3s;
