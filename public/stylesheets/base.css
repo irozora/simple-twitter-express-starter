@@ -1,7 +1,7 @@
+@charset "UTF-8";
 /* 常用顏色、字體等等*/
 @import url('https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Libre+Franklin:400,600,700&display=swap');
-
 :root {
   --darkBlue: #3495e0;
   --lightBlue: #38a1f2;
@@ -16,16 +16,23 @@
 }
 
 /* 常用按鈕樣式 */
+
+.Button-Tweet {
+  /*專屬tweet字樣按鈕的設定*/
+  padding: 6px 16px !important;
+  position: relative;
+  line-height: 20px;
+  font-weight: bold;
+}
+
 .Button-primary {
   background-color: #4ab3f4;
   color: #fff;
   border-radius: 100px;
   cursor: pointer;
-  font-weight: bold;
+  padding: 4px 14px;
   font-size: 16px;
-  padding: 6px 16px;
-  position: relative;
-  line-height: 20px;
+  width: 95px;
 }
 
 .Button-primary:hover {
@@ -47,8 +54,20 @@
   background-color: var(--hoverColorLight);
 }
 
-/*各種尺寸的大頭貼*/
+.Button-Login-Signup {
+  /*刻意避開顏色沒有設定*/
+  border: var(--border);
+  width: -webkit-fill-available;
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+  padding: 6px 0px;
+  text-align: center;
+}
 
+/*各種尺寸的大頭貼*/
 .avatar70px {
   width: 70px;
   height: 70px;
@@ -74,7 +93,6 @@
 }
 
 /* 常用設定 */
-
 .disabled {
   opacity: 0.3;
   cursor: not-allowed;
@@ -104,11 +122,11 @@ body {
   line-height: 1.42857143;
   color: #333;
   background-color: var(--bgColor);
-
   font-family: var(--generalWord);
 }
 
 * {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -155,6 +173,7 @@ select,
 textarea {
   outline: none;
 }
+
 *:focus {
   outline: none;
 }
@@ -166,7 +185,6 @@ textarea {
 }
 
 /* navbar */
-
 nav {
   position: fixed;
   width: 100%;
@@ -178,14 +196,19 @@ nav {
   max-width: 890px;
   width: 890px;
   margin: auto;
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 180px 1fr 270px;
   grid-template-columns: 180px 1fr 270px;
+  -ms-grid-rows: 48px;
   grid-template-rows: 48px;
   grid-template-areas: 'logo . option';
   color: var(--Grey);
 }
 
 .inner-navbar > .logo {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
   grid-area: logo;
   color: inherit;
   margin: auto;
@@ -194,30 +217,50 @@ nav {
 }
 
 .inner-navbar > .option {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
   grid-area: option;
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-rows: 1fr;
   grid-template-rows: 1fr;
   grid-template-areas: 'admin user logout';
 }
 
 .inner-navbar > .option > li {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
+
 .inner-navbar > .option > li:nth-child(1) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
   grid-area: admin;
 }
+
 .inner-navbar > .option > li:nth-child(2) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
   grid-area: user;
 }
+
 .inner-navbar > .option > li:nth-child(3) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
   grid-area: logout;
 }
 
 .inner-navbar > .option > li > a {
   color: inherit;
   height: inherit;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   padding: 5px;
   font-size: 15px;
@@ -231,8 +274,5 @@ nav {
   color: var(--lightBlue);
   border-bottom: 2px solid var(--lightBlue);
   -webkit-transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -ms-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }

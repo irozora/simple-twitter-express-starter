@@ -11,7 +11,7 @@
           <input type="hidden" name="UserId" value="{{currentUser.id}}" />
           <span class="feedback">140</span>
           <div class="bottom-option">
-            <button class="Button-primary disabled" id="tweetButton" disabled>Tweet</button>
+            <button class="Button-primary Button-Tweet disabled" id="tweetButton" disabled>Tweet</button>
           </div>
         </form>
       </div>
@@ -71,7 +71,7 @@
         <p>{{this.introduction}}</p>
         {{#if isFollowed}}
         <form action="/tweets" method="POST">
-          <button type="submit" class="Button-secondary">Unfollow</button>
+          <button type="submit" class="Button-primary">Unfollow</button>
         </form>
         {{else}}
         <form action="/tweets" method="POST">
