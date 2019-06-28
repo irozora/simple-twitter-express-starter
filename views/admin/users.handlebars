@@ -1,61 +1,88 @@
-<div class="list-container">
-  <div class="users-list">
-    <a href="/admin/users"><i class="fas fa-users"></i>Users List</a>
-  </div>
+<div class="admin-user">
+  <ul class="sidebar">
+    <li><i class="fas fa-indent"></i><i class="fas fa-outdent"></i></li>
+    <li class="active"><a href="/admin/users"><i class="far fa-newspaper"></i>Posts</a></li>
+    <li><a href="/admin/tweets"><i class="far fa-id-card"></i>Users</a></li>
+  </ul>
+  <div class="main-content">
+    <div class="results">
+      <div class="search-field">
+        <form action="">
+          <input type="text" placeholder="使用者名稱">
+          <button class="Button-secondary">搜尋</button>
+        </form>
+      </div>
+      <table class="table">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">User Name</th>
+          <th scope="col">User Email</th>
+          <th scope="col">Tweets</th>
+          <th scope="col">Followings</th>
+          <th scope="col">Followers</th>
+          <th scope="col">Likes</th>
+        </tr>
 
-  <div class="tweets-list">
-    <a href="/admin/tweets"><i class="fab fa-twitter"></i>Tweets List</a>
+        {{#each users}}
+        <tr>
+          <th scope="row">{{this.id}}</th>
+          <td>
+            <a href="/user/{{this.id}}/tweets">
+              {{this.name}}
+            </a>
+          </td>
+          <td>
+            <a href="/user/{{this.id}}/tweets">
+              {{this.email}}
+            </a>
+          </td>
+
+          <td>
+            <a href="/user/{{this.id}}/tweets">
+              {{this.Tweets.length}}
+            </a>
+          </td>
+
+          <td>
+            <a href="/user/{{this.id}}/following">
+              {{this.Followings.length}}
+            </a>
+          </td>
+
+          <td>
+            <a href="/user/{{this.id}}/follower">
+              {{this.Followers.length}}
+            </a>
+          </td>
+
+          <td>
+            <a href="/user/{{this.id}}/like">
+              {{this.LikedTweets.length}}
+            </a>
+          </td>
+        </tr>
+        {{/each}}
+
+      </table>
+      <ul>
+        <li>
+          <a href="/admin/users?page={{prev}}" aria-label="Previous">
+            <span aria-hidden="true">«</span>
+          </a>
+        </li>
+        {{#each totalPage}}
+        {{#ifCond this ../page}}
+        <li><a class="page-active" href="#">{{this}}</a></li>
+        {{else}}
+        <li><a href="/admin/users?page={{this}}">{{this}}</a></li>
+        {{/ifCond}}
+        {{/each}}
+        <li>
+          <a href="/admin/users?page={{next}}" aria-label="Next">
+            <span aria-hidden="true">»</span>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
-<br />
-<br />
-
-<table class="table">
-  <thead class="thead">
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">User Name</th>
-      <th scope="col">Tweets</th>
-      <th scope="col">Followings</th>
-      <th scope="col">Followers</th>
-      <th scope="col">Likes</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    {{#each users}}
-    <tr>
-      <th scope="row">{{this.id}}</th>
-      <td>
-        <a href="/user/{{this.id}}/tweets">
-          {{this.name}}
-        </a>
-      </td>
-
-      <td>
-        <a href="/user/{{this.id}}/tweets">
-          {{this.Tweets.length}} Tweets
-        </a>
-      </td>
-
-      <td>
-        <a href="/user/{{this.id}}/following">
-          {{this.Followings.length}} Followings
-        </a>
-      </td>
-
-      <td>
-        <a href="/user/{{this.id}}/follower">
-          {{this.Followers.length}} Followers
-        </a>
-      </td>
-
-      <td>
-        <a href="/user/{{this.id}}/like">
-          {{this.LikedTweets.length}} Likes
-        </a>
-      </td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table>

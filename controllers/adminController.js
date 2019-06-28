@@ -1,26 +1,57 @@
 const db = require('../models')
 const { User, Tweet, Reply, Followship, Like } = db
+const pageLimit = 5
 
 const adminController = {
   getUsers: (req, res) => {
-    return User.findAll({
+    let offset = 0
+
+    if (req.query.page) {
+      offset = (req.query.page - 1) * pageLimit
+    }
+
+    return User.findAndCountAll({
       include: [
         Tweet,
         { model: User, as: 'Followers' },
         { model: User, as: 'Followings' },
         { model: Tweet, as: 'LikedTweets' }
-      ]
-    }).then(users => {
-      users = users.sort((a, b) => b.Tweets.length - a.Tweets.length)
-      res.render('admin/users', { users, users })
+      ],
+      offset: offset,
+      limit: pageLimit,
+      distinct: true
+    }).then(result => {
+      let page = Number(req.query.page) || 1
+      let pages = Math.ceil(result.count / pageLimit)
+      let totalPage = Array.from({
+        length: pages
+      }).map((item, index) => index + 1)
+
+      let prev = page - 1 < 1 ? 1 : page - 1
+      let next = page + 1 > pages ? pages : page + 1
+
+      users = result.rows
+        .sort((a, b) => b.Tweets.length - a.Tweets.length)
+        .slice(0, 5)
+      res.render('admin/users', {
+        users: users,
+        page: page,
+        totalPage: totalPage,
+        prev: prev,
+        next: next
+      })
     })
   },
+
   getTweets: (req, res) => {
     Tweet.findAll({
-      include: [User, {
-        model: Reply,
-        include: [User]
-      }]
+      include: [
+        User,
+        {
+          model: Reply,
+          include: [User]
+        }
+      ]
     }).then(tweets => {
       const tweetsEdit = tweets.map(a => ({
         ...a.dataValues,
@@ -42,5 +73,4 @@ const adminController = {
   }
 }
 
-  
 module.exports = adminController
