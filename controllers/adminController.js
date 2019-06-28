@@ -44,23 +44,54 @@ const adminController = {
   },
 
   getTweets: (req, res) => {
-    Tweet.findAll({
-      include: [
-        User,
-        {
-          model: Reply,
-          include: [User]
-        }
-      ]
-    }).then(tweets => {
-      const tweetsEdit = tweets.map(a => ({
+
+    let offset = 0
+
+    if (req.query.page) {
+      offset = (req.query.page - 1) * pageLimit
+    }
+    
+    Tweet.findAndCountAll({include: [
+      User,
+      {model: Reply, include: [User]},
+    ],
+      offset: offset,
+      limit: pageLimit,
+      distinct: true})
+    .then(result => {
+      let page = Number(req.query.page) || 1
+      let pages = Math.ceil(result.count / pageLimit)
+      let totalPage = Array.from({
+        length: pages
+      }).map((item, index) => index + 1)
+
+      let prev = page - 1 < 1 ? 1 : page - 1
+      let next = page + 1 > pages ? pages : page + 1
+
+      const data = result.rows.map(a => ({
         ...a.dataValues,
-        description: a.dataValues.description.substring(0, 20)
+        description: a.dataValues.description.substring(0, 20),
+        repliedCount: a.Replies.length
       }))
 
-      return res.render('admin/tweets', {
-        tweets: tweetsEdit
+      console.log(data)
+
+      res.render('admin/tweets', {
+        tweets: data,
+        page: page,
+        totalPage: totalPage,
+        prev: prev,
+        next: next
       })
+      // const tweetsEdit = tweets.map(a => ({
+      //   ...a.dataValues,
+      //   description: a.dataValues.description.substring(0, 20),
+      //   repliedCount: a.Replies.length
+      // }))
+
+      // return res.render('admin/tweets', {
+      //   tweets: tweetsEdit
+      // })
     })
   },
 
