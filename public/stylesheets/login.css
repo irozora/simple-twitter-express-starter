@@ -1,6 +1,9 @@
 .signin-container {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 50% 50%;
   grid-template-columns: 50% 50%;
+  -ms-grid-rows: 100vh;
   grid-template-rows: 100vh;
   grid-template-areas: 'left right';
   z-index: 10;
@@ -9,12 +12,19 @@
 }
 
 /* col-left */
-
 .signin-container > .col-left {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
   grid-area: left;
   background-color: var(--darkBlue);
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   color: #fff;
 }
@@ -26,19 +36,30 @@
   margin: 48px auto;
   position: relative;
 }
+
 .signin-container > .col-left > ul > li > i {
   font-size: 28px;
   margin-right: 16px;
 }
 
 /* col-right */
-
 .signin-container > .col-right {
   grid-area: right;
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
   grid-area: right;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column;
   flex-flow: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   width: 350px;
   margin: auto;
@@ -79,15 +100,6 @@
 }
 
 .signin-container > .col-right > form > button {
-  width: inherit;
-  border-radius: 100px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 20px;
-  padding: 6px 0px;
-  text-align: center;
-  border: var(--border);
   color: var(--lightBlue);
   margin-top: 20px;
   background-color: #fff;
@@ -95,23 +107,16 @@
 
 .signin-container > .col-right > form > a {
   color: #fff;
-  display: inline-block;
-  width: 100%;
-  border-radius: 100px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 20px;
-  padding: 6px 0px;
-  text-align: center;
-  border: var(--border);
   background-color: var(--lightBlue);
   margin-top: 10px;
+  display: inline-block;
 }
 
 .signin-container > .col-right > form > a:hover {
   background-color: var(--hoverColorDark);
 }
+
 .signin-container > .col-right > form > button:hover {
   background-color: var(--hoverColorLight);
 }
+/*# sourceMappingURL=login.css.map */

@@ -21,7 +21,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       introduction: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
+        defaultValue: 'Hi, nice to meet you'
       },
       role: {
         allowNull: false,
