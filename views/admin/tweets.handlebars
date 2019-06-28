@@ -1,48 +1,66 @@
-<div class="list-container">
-  <div class="users-list">
-    <a href="/admin/users"><i class="fas fa-users"></i>Users List</a>
-  </div>
-
-  <div class="tweets-list">
-    <a href="/admin/tweets"><i class="fab fa-twitter"></i>Tweets List</a>
-  </div>
-</div>
-<br />
-
-<div>
-  {{#each tweets}}
-  <div>
-
-    <div style="width:60% ;margin:auto; border-width:1px;border-style:solid ;padding:5px">
-      From:
-      <a href="/users/{{this.User.id}}/tweets">{{this.User.name}}</a>
-      <div style="float:right">
-        <form action="/admin/tweets/{{this.id}}/delete?_method=DELETE" method="POST">
-
-          <button type="submit">DELETE</button>
-
+<div class="admin-user">
+  <ul class="sidebar">
+    <li><i class="fas fa-indent"></i><i class="fas fa-outdent"></i></li>
+    <li class="active"><a href="/admin/tweets"><i class="far fa-newspaper"></i>Tweets</a></li>
+    <li><a href="/admin/users"><i class="far fa-id-card"></i>Users</a></li>
+  </ul>
+  <div class="main-content">
+    <div class="results">
+      <div class="search-field">
+        <form action="">
+          <input type="text" placeholder="使用者名稱">
+          <button class="Button-secondary">搜尋</button>
         </form>
       </div>
-      <p>{{this.description}}</p>
+      <table class="table">
+        <tr>
+          <th scope="col">User Name</th>
+          <th scope="col">Tweets</th>
+          <th scope="col">Replies</th>
+        </tr>
 
+        {{#each tweets}}
+        <tr>
+          <td>
+            <a href="/user/{{this.User.id}}/tweets">
+              {{this.User.name}}
+            </a>
+          </td>
+          <td>
+            <a href="/user/{{this.id}}/tweets">
+              {{this.description}}
+            </a>
+          </td>
+
+          <td>
+            <a href="/user/{{this.id}}/tweets">
+              {{this.repliedCount}} Replies
+            </a>
+          </td>
+
+        </tr>
+        {{/each}}
+
+      </table>
+      <ul>
+        <li>
+          <a href="/admin/users?page={{prev}}" aria-label="Previous">
+            <span aria-hidden="true">«</span>
+          </a>
+        </li>
+        {{#each totalPage}}
+        {{#ifCond this ../page}}
+        <li><a class="page-active" href="#">{{this}}</a></li>
+        {{else}}
+        <li><a href="/admin/tweets?page={{this}}">{{this}}</a></li>
+        {{/ifCond}}
+        {{/each}}
+        <li>
+          <a href="/admin/tweets?page={{next}}" aria-label="Next">
+            <span aria-hidden="true">»</span>
+          </a>
+        </li>
+      </ul>
     </div>
-
-
-    <div style="width:60% ;margin:auto ;padding:5px">
-      Replies：
-
-      {{#each this.Replies}}
-      <div>
-        <p>{{this.comment}}</p>
-        <p>留言者：<a href="/users/{{this.User.id}}/tweets">{{this.User.name}}</a></p>
-      </div>
-      {{/each}}
-
-
-    </div>
-
   </div>
-  </br>
-  </br>
-  {{/each}}
 </div>
