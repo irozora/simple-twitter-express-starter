@@ -8,6 +8,8 @@
 
 .signup-container {
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
 }
@@ -17,6 +19,8 @@
   margin: auto;
   position: relative;
   background-color: #fff;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   border-radius: 10px;
   padding: 30px 40px;
@@ -59,15 +63,6 @@
 }
 
 .signup-container > .signup-box > form > button {
-  width: -webkit-fill-available;
-  border-radius: 100px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 20px;
-  padding: 6px 0px;
-  text-align: center;
-  border: var(--border);
   color: var(--lightBlue);
   background-color: #fff;
 }
@@ -75,15 +70,6 @@
 .signup-container > .signup-box > form > a {
   color: #fff;
   display: inline-block;
-  width: 100%;
-  border-radius: 100px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 20px;
-  padding: 6px 0px;
-  text-align: center;
-  border: var(--border);
   background-color: var(--lightBlue);
   margin-top: 10px;
 }
@@ -91,6 +77,7 @@
 .signup-container > .signup-box > form > a:hover {
   background-color: var(--hoverColorDark);
 }
+
 .signup-container > .signup-box > form > button:hover {
   background-color: var(--hoverColorLight);
 }

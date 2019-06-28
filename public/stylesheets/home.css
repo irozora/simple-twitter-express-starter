@@ -2,8 +2,11 @@
   padding: 60px 0px;
   width: 890px;
   margin: auto;
+  display: -ms-grid;
   display: grid;
+  -ms-grid-rows: 1fr;
   grid-template-rows: 1fr;
+  -ms-grid-columns: 65% 35%;
   grid-template-columns: 65% 35%;
   grid-template-areas: 'home-left home-right';
   grid-gap: 15px;
@@ -11,28 +14,38 @@
 }
 
 /*home-col-left*/
-
 .home-page > .home-col-left {
   background-color: #fff;
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
   grid-area: home-left;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
 }
 
 .home-page > .home-col-left > .add-tweets {
   background-color: #e8f5fd;
   padding: 15px;
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 15% 85%;
   grid-template-columns: 15% 85%;
+  -ms-grid-rows: 125px;
   grid-template-rows: 125px;
   grid-template-areas: 'home-avatar home-tweet';
 }
 
 .home-page > .home-col-left > .add-tweets > .avatar {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
   grid-area: home-avatar;
   padding-left: 24px;
 }
 
 .home-page > .home-col-left > .add-tweets > .tweets-content {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
   grid-area: home-tweet;
 }
 
@@ -63,6 +76,8 @@
 
 .home-page > .home-col-right {
   background-color: #fff;
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
   grid-area: home-right;
 }
 
@@ -70,6 +85,8 @@
   height: 110px;
   border-bottom: 1px solid var(--bgColor);
   padding: 10px 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -78,14 +95,14 @@
 }
 
 .home-page > .home-col-left > .view-tweets > .individual-tweet > .col-right {
+  display: -ms-grid;
   display: grid;
-  grid-template-columns: 1fr;
+  -ms-grid-columns: 480px;
+  grid-template-columns: 480px;
+  -ms-grid-rows: 22px 30px 15px 20px;
   grid-template-rows: 22px 30px 15px 20px;
-  grid-template-areas:
-    'tweet-info'
-    'description'
-    '.'
-    'reaction';
+  grid-template-areas: 'tweet-info' 'description' '.' 'reaction';
+  overflow: hidden;
 }
 
 .home-page
@@ -94,6 +111,8 @@
   > .individual-tweet
   > .col-right
   > p {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
   grid-area: description;
 }
 
@@ -103,6 +122,8 @@
   > .individual-tweet
   > .col-right
   > .tweet-info {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
   grid-area: tweet-info;
 }
 
@@ -135,7 +156,11 @@
   > .individual-tweet
   > .col-right
   > .reaction {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
   grid-area: reaction;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -163,6 +188,8 @@
 /*home-col-right*/
 .home-page > .home-col-right {
   padding: 10px 20px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
 }
 
@@ -174,8 +201,11 @@
 }
 
 .home-page > .home-col-right > .user-list {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 35% 65%;
   grid-template-columns: 35% 65%;
+  -ms-grid-rows: 115px;
   grid-template-rows: 115px;
   grid-template-areas: 'user-avatar user-info';
   border-bottom: 1px solid var(--bgColor);
@@ -183,21 +213,28 @@
 }
 
 .home-page > .home-col-right > .user-list > .col-left {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
   grid-area: user-avatar;
   margin: 0px auto;
 }
 
 .home-page > .home-col-right > .user-list > .col-right {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
   grid-area: user-info;
+  display: -ms-grid;
   display: grid;
+  -ms-grid-rows: 25px 50px 30px;
   grid-template-rows: 25px 50px 30px;
+  -ms-grid-columns: 1fr;
   grid-template-columns: 1fr;
-  grid-template-areas:
-    'popular-name'
-    'introduction'
-    'follow-button';
+  grid-template-areas: 'popular-name' 'introduction' 'follow-button';
 }
+
 .home-page > .home-col-right > .user-list > .col-right > .tweet-info {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
   grid-area: popular-name;
 }
 
@@ -207,10 +244,15 @@
 }
 
 .home-page > .home-col-right > .user-list > .col-right > p {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
   grid-area: introduction;
 }
 
 .home-page > .home-col-right > .user-list > .col-right > form {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
   grid-area: follow-button;
   text-align: right;
 }
+/*# sourceMappingURL=home.css.map */
