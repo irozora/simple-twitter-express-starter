@@ -41,8 +41,8 @@
 
   {{!-- 右半側 --}}
   <div class="user-info-list">
-    <p>Following</p>
-    {{#each followingList}}
+    <p>Follower</p>
+    {{#each followedList}}
     <div class="user-list">
       <div class="col-left">
         <div style="background-image:url({{this.avatar}})" class="avatar70px">
@@ -56,7 +56,7 @@
         {{else}}
 
         {{!-- 試了很多種寫法(if、ifCond，甚至改變參數等...)，目前Following卡片裡的Unfollow/Follow按鈕目前無法依照預期的印出QQ --}}
-        {{#ifCond this.followedOrNot ../currentUser.isFollowed}}
+        {{#if ../isFollowed}}
         <form action="/tweets" method="POST">
           <button type="submit" class="Button-secondary">Unfollow</button>
         </form>
@@ -64,7 +64,7 @@
         <form action="/tweets" method="POST">
           <button type="submit" class="Button-secondary">Follow</button>
         </form>
-        {{/ifCond}}
+        {{/if}}
         {{/ifCond}}
 
       </div>

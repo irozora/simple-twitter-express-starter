@@ -1,4 +1,6 @@
-.following-page {
+/* for followers and followings handlebars*/
+
+.user-specific-page {
   min-width: 800px;
   max-width: 1080px;
   padding: 100px;
@@ -17,7 +19,7 @@
   padding: 15px 30px;
 }
 
-.following-list {
+.user-info-list {
   grid-area: following-right;
   height: fit-content;
 }
@@ -32,21 +34,21 @@
   padding: 5px;
 }
 
-.following-list > p {
+.user-info-list > p {
   text-transform: uppercase;
   font-size: 1.7em;
   font-weight: bold;
   padding-bottom: 10px;
 }
 
-.following-list > .user-list {
+.user-info-list > .user-list {
   background-color: #fff;
   padding: 15px 30px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   width: auto;
 }
 
-.following-page > .following-list > .user-list {
+.user-specific-page > .user-info-list > .user-list {
   display: grid;
 
   grid-template-rows: 1fr;
@@ -54,15 +56,15 @@
   grid-template-areas: 'user-left user-right';
 }
 
-.following-page > .following-list > .user-list > .col-left {
+.user-specific-page > .user-info-list > .user-list > .col-left {
   grid-area: user-left;
   height: fit-content;
 }
 
-.following-page > .following-list > .user-list > .col-right {
+.user-specific-page > .user-info-list > .user-list > .col-right {
   grid-area: user-right;
 }
 
-.following-page > .following-list > .user-list > .col-left > .tweet-info {
+.user-specific-page > .user-info-list > .user-list > .col-left > .tweet-info {
   padding: 5px 5px;
 }

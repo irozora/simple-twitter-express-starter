@@ -91,8 +91,29 @@ const userController = {
         followingList: followingList
       })
     })
+  },
+
+  // getFollowerPage的狀況跟getFollowingPage一樣...
+  getFollowerPage: (req, res) => {
+    return User.findByPk(req.params.id, {
+      include: [
+        Tweet,
+        { model: User, as: 'Followers' },
+        { model: User, as: 'Followings' },
+        { model: Tweet, as: 'LikedTweets' }
+      ]
+    }).then(user => {
+      const isFollowed = user.Followings.map(d => d.id).includes(user.id)
+      const followedList = user.Followers.map(follower => ({
+        ...follower.dataValues
+      }))
+      res.render('followers', {
+        user: user,
+        followedList: followedList,
+        isFollowed: isFollowed
+      })
+    })
   }
 }
 
 module.exports = userController
-// followingList.followedOrNot
