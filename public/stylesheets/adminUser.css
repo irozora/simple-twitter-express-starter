@@ -1,0 +1,127 @@
+.admin-user {
+  height: 100%;
+  overflow: hidden;
+  padding-top: 48px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 180px 1fr;
+  grid-template-columns: 180px 1fr;
+  -ms-grid-rows: 100vh;
+  grid-template-rows: 100vh;
+  grid-template-areas: 'sidebar main';
+}
+
+.admin-user .sidebar {
+  font-size: 15px;
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: sidebar;
+  background-color: #fff;
+}
+
+.admin-user .sidebar li a {
+  color: var(--Grey);
+  padding: 10px 20px;
+  width: 100%;
+  display: inline-block;
+}
+
+.admin-user .sidebar li a i {
+  margin-right: 5px;
+}
+
+.admin-user .sidebar li:nth-child(1) {
+  color: var(--Grey);
+  text-align: right;
+  padding: 10px;
+}
+
+.admin-user .sidebar li:nth-child(1) i {
+  font-size: 18px;
+}
+
+.admin-user .sidebar .fa-indent {
+  display: none;
+}
+
+.admin-user .main-content {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: main;
+  margin: 100px auto;
+}
+
+.admin-user .main-content .results {
+  width: 1000px;
+  height: 500px;
+  background-color: #fff;
+  padding: 30px;
+}
+
+.admin-user .main-content .results .search-field {
+  margin-bottom: 15px;
+}
+
+.admin-user .main-content .results .search-field form input {
+  font-size: 14px;
+  border-radius: 100px;
+  padding: 7px 12px;
+  border: 1px solid #ddd;
+  margin-right: 10px;
+}
+
+.admin-user .main-content .table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.admin-user .main-content .table th,
+.admin-user .main-content .table td {
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.admin-user .main-content .table th a,
+.admin-user .main-content .table td a {
+  display: inline-block;
+  width: 100%;
+  color: var(--Grey);
+  padding: 12px 8px;
+}
+
+.admin-user .main-content .table td:hover {
+  background-color: var(--hoverColorLight);
+}
+
+.admin-user .main-content .table tr:nth-child(1) th {
+  padding: 15px 8px;
+  background-color: var(--bgColor);
+}
+
+.admin-user .main-content ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+}
+
+.admin-user .main-content ul li a {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #007bff;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+
+.page-active {
+  color: #fff !important;
+  background-color: #007bff !important;
+  border-color: #007bff !important;
+}

@@ -93,6 +93,15 @@
 }
 
 /* 常用設定 */
+.active {
+  border-right: 2px solid var(--lightBlue);
+  background-color: var(--hoverColorLight);
+}
+
+.active a {
+  color: var(--lightBlue) !important;
+}
+
 .disabled {
   opacity: 0.3;
   cursor: not-allowed;
