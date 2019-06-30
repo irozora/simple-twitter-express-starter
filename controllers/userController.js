@@ -134,11 +134,10 @@ const userController = {
   getUserProfile: (req, res) => {
     User.findByPk(req.params.id, {
       include: [
-        Tweet,
-        Reply,
+        { model: Tweet, include: [Reply, { model: User, as: 'LikedUsers' }] },
         { model: User, as: 'Followers' },
         { model: User, as: 'Followings' },
-        { model: Tweet, as: 'LikedTweets' }
+        { model: Tweet, as: 'LikedTweets' },
       ]
     }).then(user => {
 
@@ -146,9 +145,8 @@ const userController = {
         ...a.dataValues,
         description: a.dataValues.description.substring(0, 100),
         isReplied: req.user.Replies.map(r => r.id).includes(a.id),
-        // isLiked: req.user.TweetsLiked.map(l => l.id).includes(a.id)
+        isLiked: req.user.LikedTweets.map(l => l.id).includes(a.id)
       }))
-
       return res.render('profile', { user, tweets })
     })
   },
@@ -161,7 +159,6 @@ const userController = {
 
   putUserProfile: (req, res) => {
     if (!req.body.name) {
-      console.log('error')
       req.flash('error_messages', "Name cant be blank")
       return res.redirect('back')
     }

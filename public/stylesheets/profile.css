@@ -120,3 +120,11 @@ display: inline-block;
   display: inline-block;
   width: 100%;
 }
+
+.user-profile-page > .profile-show > .show-tweets > .individual-tweet > .col-right >.profile-tweets-reaction> a, button {
+  font-size: 14px;
+  color: var(--Grey);
+  margin-right: 30px;
+  border: none;
+  cursor: pointer;
+}
