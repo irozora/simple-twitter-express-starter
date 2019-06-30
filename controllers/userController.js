@@ -10,23 +10,14 @@ const userController = {
   },
 
   signUp: async (req, res) => {
-    if (req.body.passwordCheck !== req.body.password) {
-      req.flash('error_messages', '您的兩次密碼輸入不相符。')
-      return res.redirect('/signup')
-    }
-    const user = await User.findOne({ where: { email: req.body.email } })
-    if (user) {
-      req.flash('error_messages', '這個信箱已經有使用者註冊過了。')
-      return res.redirect('/signup')
-    }
-    const done = await User.create({
+    User.create({
       name: req.body.name,
       email: req.body.email,
-      password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null)
-    })
-    if (done) {
+      password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null),
+      introduction: req.body.introduction
+    }).then(() => {
       return res.redirect('/signin')
-    }
+    })
   },
 
   signInPage: (req, res) => {
@@ -92,7 +83,6 @@ const userController = {
     })
   },
 
-  // getFollowingPage的"該使用者的追蹤者是否是自己的追蹤者功能還未完工QQ"
   getFollowingPage: (req, res) => {
     return User.findByPk(req.params.id, {
       include: [
@@ -102,10 +92,10 @@ const userController = {
         { model: Tweet, as: 'LikedTweets' }
       ]
     }).then(user => {
-      const isFollowed = user.Followings.map(d => d.id).includes(user.id)
+      const isFollowed = user.Followers.map(d => d.id).includes(req.user.id)
       const followingList = user.Followings.map(following => ({
         ...following.dataValues,
-        followedOrNot: req.user.Followings.map(d => d.id).includes(user.id)
+        followed: req.user.Followings.map(d => d.id).includes(following.id)
       }))
 
       res.render('followings', {
@@ -116,7 +106,6 @@ const userController = {
     })
   },
 
-  // getFollowerPage的狀況跟getFollowingPage一樣...
   getFollowerPage: (req, res) => {
     return User.findByPk(req.params.id, {
       include: [
@@ -126,10 +115,12 @@ const userController = {
         { model: Tweet, as: 'LikedTweets' }
       ]
     }).then(user => {
-      const isFollowed = user.Followings.map(d => d.id).includes(user.id)
+      const isFollowed = user.Followers.map(d => d.id).includes(req.user.id)
       const followedList = user.Followers.map(follower => ({
-        ...follower.dataValues
+        ...follower.dataValues,
+        followed: req.user.Followings.map(d => d.id).includes(follower.id)
       }))
+
       res.render('followers', {
         user: user,
         followedList: followedList,
@@ -139,25 +130,29 @@ const userController = {
   },
 
   addFollowing: (req, res) => {
-    return Followship.create({ followerId: req.user.id, followingId: req.params.id }).then(followship => {
-      console.log(req.user.id, req.params.id)
+    return Followship.create({
+      followerId: req.user.id,
+      followingId: req.body.UserId
+    }).then(followship => {
       return res.redirect('back')
     })
   },
 
   removeFollowing: (req, res) => {
-    return Followship.findOne({ where: { followerId: req.user.id, followingId: req.params.id } }).then(followship => {
-      followship.destroy().then(followship => {
-        return res.redirect('back')
-      })
+    return Followship.destroy({
+      where: {
+        followerId: req.user.id,
+        followingId: req.params.id
+      }
+    }).then(() => {
+      return res.redirect('back')
     })
   },
 
   getUserProfile: (req, res) => {
     User.findByPk(req.params.id, {
       include: [
-        Tweet,
-        Reply,
+        { model: Tweet, include: [Reply, { model: User, as: 'LikedUsers' }] },
         { model: User, as: 'Followers' },
         { model: User, as: 'Followings' },
         { model: Tweet, as: 'LikedTweets' }
@@ -166,10 +161,9 @@ const userController = {
       const tweets = user.Tweets.map(a => ({
         ...a.dataValues,
         description: a.dataValues.description.substring(0, 100),
-        isReplied: req.user.Replies.map(r => r.id).includes(a.id)
-        // isLiked: req.user.TweetsLiked.map(l => l.id).includes(a.id)
+        isReplied: req.user.Replies.map(r => r.id).includes(a.id),
+        isLiked: req.user.LikedTweets.map(l => l.id).includes(a.id)
       }))
-
       return res.render('profile', { user, tweets })
     })
   },
@@ -182,7 +176,6 @@ const userController = {
 
   putUserProfile: (req, res) => {
     if (!req.body.name) {
-      console.log('error')
       req.flash('error_messages', 'Name cant be blank')
       return res.redirect('back')
     }
