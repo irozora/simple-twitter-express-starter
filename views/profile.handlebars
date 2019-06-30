@@ -13,7 +13,7 @@
     <div class="right">
       <ul class="right-list">
         <li class="item">
-          <a href="">
+          <a href="/users/{{user.id}}/tweets">
             <div>
               <p>Tweets</p>
               <p>{{user.Tweets.length}}</p>
@@ -21,7 +21,7 @@
           </a>
         </li>
         <li class="item">
-          <a href="">
+          <a href="/users/{{user.id}}/followers">
             <div>
               <p>Follower</p>
               <p>{{user.Followers.length}}</p>
@@ -29,7 +29,7 @@
           </a>
         </li>
         <li class="item">
-          <a href="">
+          <a href="/users/{{user.id}}/followings">
             <div>
               <p>Following</p>
               <p>{{user.Followings.length}}</p>
@@ -37,7 +37,7 @@
           </a>
         </li>
         <li class="item">
-          <a href="">
+          <a href="/users/{{user.id}}/likes">
             <div>
               <p>Like</p>
               <p>{{user.LikedTweets.length}}</p>

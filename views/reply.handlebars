@@ -1,0 +1,96 @@
+<div class="user-specific-page">
+  {{!-- 左半側 --}}
+  <div class="user-detail">
+    <div style="background-image:url({{user.avatar}})" class="avatar70px">
+    </div>
+    <div class="user-info">
+      <a href="/users/{{user.id}}/tweets">{{user.name}}</a>
+    </div>
+    <div class="user-describe">
+      <p>{{user.introduction}}</p>
+    </div>
+    <div class="tweet-amount">
+      <span>Tweets</span> <a href="/users/{{user.id}}/tweets">{{user.Tweets.length}}</a>
+    </div>
+    <div class="following-amount">
+      <span>Following</span> <a href="/users/{{user.id}}/followings">{{user.Followings.length}}</a>
+    </div>
+    <div class="follower-amount">
+      <span>Follower</span> <a href="/users/{{user.id}}/followers">{{user.Followers.length}}</a>
+    </div>
+    <div class="likes-amount">
+      <span>Like</span> <a href="/users/{{user.id}}/likes">{{user.LikedTweets.length}}</a>
+    </div>
+
+    <div class="edit-or-follow">
+      {{#ifCond user.id currentUser.id}}
+      <a href="/users/{{currentUser.id}}/edit" class="Button-secondary">Edit Profile</a>
+      {{else}}
+      {{#if isFollowed}}
+      <form action="/followships/{{user.id}}?_method=DELETE" method="POST">
+        <button type="submit" class="Button-secondary">Unfollow</button>
+      </form>
+      {{else}}
+      <form action="/followships" method="POST">
+        <input type="hidden" name="UserId" value="{{user.id}}">
+        <button type="submit" class="Button-secondary">Follow</button>
+      </form>
+      {{/if}}
+      {{/ifCond}}
+    </div>
+  </div>
+
+  {{!-- 右半側 --}}
+  <div class="user-info-list">
+    <p>Tweet</p>
+    <div class="user-list">
+      <div class="col-left">
+        <div style="background-image:url({{tweet.User.avatar}})" class="avatar70px">
+        </div>
+      </div>
+      <div class="col-right">
+        <div class="tweet-info">
+          <a href="/users/{{tweet.User.id}}/tweets">@{{tweet.User.name}}</a>
+          <span>．{{moment tweet.createAt}}</span>
+        </div>
+        <p>{{tweet.description}}</p>
+        <div class="reaction">
+          <a href="/tweets/{{tweet.id}}/replies">
+            {{#if tweet.isReplied}}
+            <i class="fas fa-comment"></i>
+            {{else}}
+            <i class="far fa-comment"></i>
+            {{/if}}
+            &nbsp;&nbsp;{{tweet.Replies.length}}</a>
+
+          {{#if tweet.isLiked}}
+          <form action="/tweets/{{this.id}}/unlike" method="POST">
+            <button type="submit"><i class="fas fa-heart"></i>
+              {{else}}
+              <form action="/tweets/{{tweet.id}}/like" method="POST">
+                <button type="submit"><i class="far fa-heart"></i>
+                  {{/if}}
+                  &nbsp;&nbsp;{{tweet.LikedUsers.length}}</button>
+              </form>
+        </div>
+      </div>
+    </div>
+    </br>
+    <p>Reply</p>
+    {{#each tweet.Replies}}
+    <div class="user-list">
+      <div class="col-left">
+        <div style="background-image:url({{this.User.avatar}})" class="avatar70px">
+        </div>
+      </div>
+      <div class="col-right">
+        <div class="tweet-info">
+          <a href="/users/{{this.User.id}}/tweets">@{{this.User.name}}</a>
+          <span>．{{moment this.createAt}}</span>
+        </div>
+        <p>{{this.comment}}</p>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>

@@ -8,7 +8,7 @@ const tweetController = {
       where: { followerId: req.user.id }
     })
     const followingsId = findFollowings.map(f => f.followingId)
-    // 如果user沒有followings會出錯,所以分開處理
+
     whereQuery['UserId'] =
       findFollowings.length > 0 ? [followingsId, req.user.id] : req.user.id
 
@@ -54,6 +54,36 @@ const tweetController = {
       req.flash('success_messages', 'restaurant was successfully created')
       return res.redirect('/tweets')
     })
+  },
+
+  getReply: async (req, res) => {
+    const tweet = await Tweet.findOne({
+      where: { id: req.params.tweet_id },
+      include: [
+        User,
+        { model: User, as: 'LikedUsers' },
+        { model: Reply, include: User, order: [['createdAt', 'DESC']] }
+      ]
+    })
+    console.log('LikedUsers', tweet.LikedUsers)
+    console.log('LikedUsers', tweet.Replies)
+
+    tweet.isLiked = tweet.LikedUsers.some(a => a.id === req.user.id)
+      ? true
+      : false
+    tweet.isReplied = tweet.Replies.some(b => b.UserId.id === req.user.id)
+      ? true
+      : false
+
+    const user = await User.findByPk(tweet.UserId, {
+      include: [
+        { model: User, as: 'Followers' },
+        { model: User, as: 'Followings' },
+        { model: Tweet, as: 'LikedTweets' }
+      ]
+    })
+
+    return res.render('reply', { tweet: tweet, user: user })
   }
 }
 
