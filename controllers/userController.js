@@ -83,7 +83,6 @@ const userController = {
         ...following.dataValues,
         followedOrNot: req.user.Followings.map(d => d.id).includes(user.id)
       }))
-      console.log(followingList)
 
       res.render('followings', {
         user: user,
@@ -127,6 +126,34 @@ const userController = {
       followship.destroy().then(followship => {
         return res.redirect('back')
       })
+    })
+  },
+
+  getUserProfile: (req, res) => {
+    User.findByPk(req.params.id, {
+      include: [
+        Tweet,
+        Reply,
+        { model: User, as: 'Followers' },
+        { model: User, as: 'Followings' },
+        { model: Tweet, as: 'LikedTweets' }
+      ]
+    }).then(user => {
+
+      const tweets = user.Tweets.map(a => ({
+        ...a.dataValues,
+        description: a.dataValues.description.substring(0, 100),
+        isReplied: req.user.Replies.map(r => r.id).includes(a.id),
+        // isLiked: req.user.TweetsLiked.map(l => l.id).includes(a.id)
+      }))
+
+      return res.render('profile', { user, tweets })
+    })
+  },
+
+  putUserProfile: (req, res) => {
+    User.findByPk(req.params.id).then(user => {
+      return res.render('edit', { user })
     })
   }
 }
