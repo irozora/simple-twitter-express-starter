@@ -31,7 +31,7 @@
         <button type="submit" class="Button-secondary">Unfollow</button>
       </form>
       {{else}}
-      <form action="/followships/{{user.id}}" method="POST">
+      <form action="/followships" method="POST">
         <button type="submit" class="Button-secondary">Follow</button>
       </form>
       {{/if}}
@@ -54,6 +54,26 @@
 
       <div class="col-right">
         <p>{{this.description}}</p>
+        <div class="reaction">
+          <a href="/tweets/{{this.UserId}}/replies">
+            {{#if isReplied}}
+            <i class="fas fa-comment"></i>
+            {{else}}
+            <i class="far fa-comment"></i>
+            {{/if}}
+            &nbsp;&nbsp;{{this.Replies.length}}</a>
+
+
+          {{#if isLiked}}
+          <form action="/tweets/{{this.UserId}}/unlike" method="POST">
+            <button type="submit"><i class="fas fa-heart"></i>
+              {{else}}
+              <form action="/tweets/{{this.UserId}}/like" method="POST">
+                <button type="submit"><i class="far fa-heart"></i>
+                  {{/if}}
+                  &nbsp;&nbsp;{{this.LikedUsers.length}}</button>
+              </form>
+        </div>
       </div>
     </div>
     {{/each}}
