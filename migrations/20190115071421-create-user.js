@@ -18,11 +18,14 @@ module.exports = {
         type: Sequelize.STRING
       },
       avatar: {
+        allowNull: false,
+        defaultValue: '/images/avatar.png',
         type: Sequelize.STRING
       },
       introduction: {
-        type: Sequelize.TEXT,
-        defaultValue: 'Hi, nice to meet you'
+        allowNull: false,
+        defaultValue: 'Hi, nice to meet you',
+        type: Sequelize.TEXT
       },
       role: {
         allowNull: false,

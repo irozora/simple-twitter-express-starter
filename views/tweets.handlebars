@@ -69,15 +69,22 @@
           <a href="/users/{{this.id}}/tweets">@{{this.name}}</a>
         </div>
         <p>{{this.introduction}}</p>
+        {{#ifCond this.id ../currentUser.id}}
+        <form action=''>
+          <button type="submit" class="Button-secondary disabled" disabled='disabled'>Follow</button>
+        </form>
+        {{else}}
         {{#if isFollowed}}
         <form action="/followships/{{this.id}}?_method=DELETE" method="POST">
           <button type="submit" class="Button-primary">Unfollow</button>
         </form>
         {{else}}
-        <form action="/followships/{{this.id}}" method="POST">
+        <form action="/followships" method="POST">
+          <input type="hidden" name="UserId" value="{{this.id}}">
           <button type="submit" class="Button-secondary">Follow</button>
         </form>
         {{/if}}
+        {{/ifCond}}
       </div>
     </div>
     {{/each}}

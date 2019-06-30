@@ -22,18 +22,18 @@
         {{#each tweets}}
         <tr>
           <td>
-            <a href="/user/{{this.User.id}}/tweets">
+            <a href="/users/{{this.User.id}}/tweets">
               {{this.User.name}}
             </a>
           </td>
           <td>
-            <a href="/user/{{this.id}}/tweets">
+            <a href="/users/{{this.id}}/tweets">
               {{this.description}}
             </a>
           </td>
 
           <td>
-            <a href="/user/{{this.id}}/tweets">
+            <a href="/users/{{this.id}}/tweets">
               {{this.repliedCount}} Replies
             </a>
           </td>
