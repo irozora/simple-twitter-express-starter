@@ -8,16 +8,7 @@ const userController = {
   },
 
   signUp: async (req, res) => {
-    if (req.body.passwordCheck !== req.body.password) {
-      req.flash('error_messages', '您的兩次密碼輸入不相符。')
-      return res.redirect('/signup')
-    }
-    const user = await User.findOne({ where: { email: req.body.email } })
-    if (user) {
-      req.flash('error_messages', '這個信箱已經有使用者註冊過了。')
-      return res.redirect('/signup')
-    }
-    const done = await User.create({
+    User.create({
       name: req.body.name,
       email: req.body.email,
       password: bcrypt.hashSync(
@@ -26,10 +17,9 @@ const userController = {
         null
       ),
       introduction: req.body.introduction
-    })
-    if (done) {
+    }).then(() => {
       return res.redirect('/signin')
-    }
+    })
   },
 
   signInPage: (req, res) => {
@@ -73,7 +63,6 @@ const userController = {
     })
   },
 
-  // getFollowingPage的"該使用者的追蹤者是否是自己的追蹤者功能還未完工QQ"
   getFollowingPage: (req, res) => {
     return User.findByPk(req.params.id, {
       include: [
@@ -83,12 +72,11 @@ const userController = {
         { model: Tweet, as: 'LikedTweets' }
       ]
     }).then(user => {
-      const isFollowed = user.Followings.map(d => d.id).includes(user.id)
+      const isFollowed = user.Followers.map(d => d.id).includes(req.user.id)
       const followingList = user.Followings.map(following => ({
         ...following.dataValues,
-        followedOrNot: req.user.Followings.map(d => d.id).includes(user.id)
+        followed: req.user.Followings.map(d => d.id).includes(following.id)
       }))
-      console.log(followingList)
 
       res.render('followings', {
         user: user,
@@ -98,7 +86,6 @@ const userController = {
     })
   },
 
-  // getFollowerPage的狀況跟getFollowingPage一樣...
   getFollowerPage: (req, res) => {
     return User.findByPk(req.params.id, {
       include: [
@@ -108,10 +95,12 @@ const userController = {
         { model: Tweet, as: 'LikedTweets' }
       ]
     }).then(user => {
-      const isFollowed = user.Followings.map(d => d.id).includes(user.id)
+      const isFollowed = user.Followers.map(d => d.id).includes(req.user.id)
       const followedList = user.Followers.map(follower => ({
-        ...follower.dataValues
+        ...follower.dataValues,
+        followed: req.user.Followings.map(d => d.id).includes(follower.id)
       }))
+
       res.render('followers', {
         user: user,
         followedList: followedList,
@@ -121,17 +110,22 @@ const userController = {
   },
 
   addFollowing: (req, res) => {
-    return Followship.create({ followerId: req.user.id, followingId: req.params.id }).then(followship => {
-      console.log(req.user.id, req.params.id)
+    return Followship.create({
+      followerId: req.user.id,
+      followingId: req.body.UserId
+    }).then(followship => {
       return res.redirect('back')
     })
   },
 
   removeFollowing: (req, res) => {
-    return Followship.findOne({ where: { followerId: req.user.id, followingId: req.params.id } }).then(followship => {
-      followship.destroy().then(followship => {
-        return res.redirect('back')
-      })
+    return Followship.destroy({
+      where: {
+        followerId: req.user.id,
+        followingId: req.params.id
+      }
+    }).then(() => {
+      return res.redirect('back')
     })
   }
 }

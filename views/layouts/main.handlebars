@@ -26,7 +26,7 @@
         {{#ifCond currentUser.role "user"}}
         <li>
         </li> {{/ifCond}}
-        <li> <a href=""><i class="far fa-user-circle"></i>Profile</a>
+        <li><a href="/users/{{currentUser.id}}/tweets"><i class="far fa-user-circle"></i>Profile</a>
         </li>
         <li><a href="/logout" class="logout"><i class="fas fa-sign-out-alt"></i>LogOut</a></li>
     </div>

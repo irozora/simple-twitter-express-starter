@@ -31,7 +31,8 @@
         <button type="submit" class="Button-secondary">Unfollow</button>
       </form>
       {{else}}
-      <form action="/followships/{{user.id}}" method="POST">
+      <form action="/followships" method="POST">
+        <input type="hidden" name="UserId" value="{{user.id}}">
         <button type="submit" class="Button-secondary">Follow</button>
       </form>
       {{/if}}
@@ -52,19 +53,18 @@
         </div>
 
         {{#ifCond this.id ../currentUser.id}}
-        <a href="/users/{{currentUser.id}}/edit" class="Button-secondary">Edit Profile</a>
+        <a href="" class="Button-secondary disabled" disabled='disabled'>Follow</a>
         {{else}}
-
-        {{!-- 試了很多種寫法(if、ifCond，甚至改變參數等...)，目前Following卡片裡的Unfollow/Follow按鈕目前無法依照預期的印出QQ --}}
-        {{#ifCond this.followedOrNot ../currentUser.isFollowed}}
+        {{#if this.followed}}
         <form action="/followships/{{this.id}}?_method=DELETE" method="POST">
           <button type="submit" class="Button-secondary">Unfollow</button>
         </form>
         {{else}}
-        <form action="/followships/{{this.id}}" method="POST">
+        <form action="/followships" method="POST">
+          <input type="hidden" name="UserId" value="{{this.id}}">
           <button type="submit" class="Button-secondary">Follow</button>
         </form>
-        {{/ifCond}}
+        {{/if}}
         {{/ifCond}}
 
       </div>

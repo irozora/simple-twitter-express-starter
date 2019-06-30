@@ -1,4 +1,4 @@
-const endpoint = '/user/api/v1'
+const endpoint = '/users/api/v1'
 const users = []
 
 fetch(endpoint)
