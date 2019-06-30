@@ -15,6 +15,10 @@ const port = 3000
 // use helpers.getUser(req) to replace req.user
 // use helpers.ensureAuthenticated(req) to replace req.isAuthenticated()
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 app.use(express.static('public'))
 app.engine(
   'handlebars',
