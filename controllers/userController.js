@@ -1,5 +1,7 @@
 const db = require('../models')
 const bcrypt = require('bcrypt-nodejs')
+const imgur = require('imgur-node-api')
+const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID
 const { User, Tweet, Reply, Like, Followship } = db
 
 const userController = {
@@ -83,7 +85,6 @@ const userController = {
         ...following.dataValues,
         followedOrNot: req.user.Followings.map(d => d.id).includes(user.id)
       }))
-      console.log(followingList)
 
       res.render('followings', {
         user: user,
@@ -128,7 +129,72 @@ const userController = {
         return res.redirect('back')
       })
     })
-  }
+  },
+
+  getUserProfile: (req, res) => {
+    User.findByPk(req.params.id, {
+      include: [
+        Tweet,
+        Reply,
+        { model: User, as: 'Followers' },
+        { model: User, as: 'Followings' },
+        { model: Tweet, as: 'LikedTweets' }
+      ]
+    }).then(user => {
+
+      const tweets = user.Tweets.map(a => ({
+        ...a.dataValues,
+        description: a.dataValues.description.substring(0, 100),
+        isReplied: req.user.Replies.map(r => r.id).includes(a.id),
+        // isLiked: req.user.TweetsLiked.map(l => l.id).includes(a.id)
+      }))
+
+      return res.render('profile', { user, tweets })
+    })
+  },
+
+  editUserProfile: (req, res) => {
+    User.findByPk(req.user.id).then(user => {
+      return res.render('edit', { user })
+    })
+  },
+
+  putUserProfile: (req, res) => {
+    if (!req.body.name) {
+      console.log('error')
+      req.flash('error_messages', "Name cant be blank")
+      return res.redirect('back')
+    }
+    const { file } = req
+    if (file) {
+      imgur.setClientID(IMGUR_CLIENT_ID);
+      imgur.upload(file.path, (err, img) => {
+        return User.findByPk(req.user.id)
+          .then(user => {
+            user.update({
+              name: req.body.name,
+              introduction: req.body.introduction,
+              avatar: file ? img.data.link : user.avatar,
+            })
+              .then(user => {
+                req.flash('success_messages', 'Your profile was successfully to update')
+                res.redirect(`/users/${req.user.id}/tweets`)
+              })
+          })
+      })
+    } else {
+      User.findByPk(req.user.id).then(user => {
+        user.update({
+          name: req.body.name,
+          introduction: req.body.introduction,
+          avatar: user.avatar,
+        }).then(user => {
+          req.flash('success_messages', 'Your profile was be successfully updated')
+          return res.redirect(`/users/${req.user.id}/tweets`)
+        })
+      })
+    }
+  },
 }
 
 module.exports = userController

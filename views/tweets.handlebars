@@ -70,11 +70,11 @@
         </div>
         <p>{{this.introduction}}</p>
         {{#if isFollowed}}
-        <form action="/tweets" method="POST">
+        <form action="/followships/{{this.id}}?_method=DELETE" method="POST">
           <button type="submit" class="Button-primary">Unfollow</button>
         </form>
         {{else}}
-        <form action="/tweets" method="POST">
+        <form action="/followships/{{this.id}}" method="POST">
           <button type="submit" class="Button-secondary">Follow</button>
         </form>
         {{/if}}

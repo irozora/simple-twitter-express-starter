@@ -74,8 +74,6 @@ const adminController = {
         repliedCount: a.Replies.length
       }))
 
-      console.log(data)
-
       res.render('admin/tweets', {
         tweets: data,
         page: page,
@@ -83,15 +81,7 @@ const adminController = {
         prev: prev,
         next: next
       })
-      // const tweetsEdit = tweets.map(a => ({
-      //   ...a.dataValues,
-      //   description: a.dataValues.description.substring(0, 20),
-      //   repliedCount: a.Replies.length
-      // }))
 
-      // return res.render('admin/tweets', {
-      //   tweets: tweetsEdit
-      // })
     })
   },
 

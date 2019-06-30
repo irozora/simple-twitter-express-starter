@@ -1,0 +1,33 @@
+<form action="/users/{{user.id}}/edit?_method=PUT" method="POST" enctype="multipart/form-data">
+  <div class="user-profile-page">
+    <div class="profile-header">
+      <img src="https://picsum.photos/1000/300" alt="">
+    </div>
+
+    <div class="profile-info-edit">
+      <div class="info-edit">
+        <div class="edit-data">
+          <a href="/users/{{user.id}}/tweets"><img src="{{user.avatar}}" alt="" class="profile-avatar"></a>
+        </div>
+        <div class="edit-data">
+          <h2 class="edit-label">大頭貼:</h2>
+          <input type="file" name="avatar" id="avatar">
+        </div>
+
+        <div class="edit-data">
+          <h2 class="edit-label">姓名:</h2>
+          <input type="text" name="name" id="name" value="{{user.name}}">
+        </div>
+
+        <div class="edit-data">
+          <h2 class="edit-label">自我介紹:</h2>
+          <textarea name="introduction" id="introduction" cols="30" rows="5">{{user.introduction}}</textarea>
+        </div>
+        <button type="submit" class="Button-secondary">Save</button>
+      </div>
+
+    </div>
+
+
+  </div>
+</form>

@@ -1,0 +1,122 @@
+/* for followers and followings handlebars*/
+.user-profile-page {
+  min-width: 1000px;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+.user-profile-page > .profile-header {
+  display: block;
+  height: 100%;
+  width: 1440px;
+  background-color: aqua;
+}
+
+.profile-nav {
+  min-width: 800px;
+  max-width: 100%;
+  background-color: white;
+  font-size: 14px;
+}
+
+.profile-nav > .left{
+  display: inline-block;
+  width: 33% ;
+}
+
+.profile-avatar-position {
+  position: absolute;
+  top:225px;
+  left:20px;
+}
+
+.profile-avatar {
+  border-radius: 100%;
+  height: 250px;
+  left: 0;
+  top: 0;
+  width: 250px;
+}
+
+.profile-nav > .right{
+  display: inline-block;
+  width: 66% ;
+}
+
+.profile-nav > .right > .right-list {
+  display: inline-block;
+
+}
+
+.profile-nav > .right > .right-list >.item {
+  display:inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
+  vertical-align:middle;
+}
+.float-right {
+  float: right;
+}
+
+.profile-show {
+  padding:10px 50px;
+}
+
+.profile-info {
+  display: inline-block;
+  vertical-align:top;
+  padding-top:50px;
+
+}
+
+.profile-show > .show-tweets{
+  padding:50px;
+  display: inline-block;
+  width: 60%;
+}
+
+.profile-show > .show-tweets > .individual-tweet {
+  background-color: white;
+  height: 100%;
+  border-bottom: 1px solid var(--bgColor);
+  padding: 10px 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.profile-show > .show-tweets > .individual-tweet > .col-left, .col-right{
+  padding:10px; 
+}
+
+
+.profile-tweet-description {
+  padding-top: 10px;
+  padding-bottom: 10px; 
+}
+
+.profile-tweets-reaction {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.profile-info-edit {
+  padding: 50px;
+  text-align: center;
+}
+
+.info-edit {
+display: inline-block;
+}
+
+.edit-data {
+  margin:10px 0;
+}
+
+.edit-label {
+  display: inline-block;
+  width: 100%;
+}
