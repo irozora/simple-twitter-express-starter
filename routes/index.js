@@ -31,6 +31,7 @@ module.exports = (app, passport) => {
 
   app.post('/tweets/:id/like', authenticated, userController.like)
   app.post('/tweets/:id/unlike', authenticated, userController.unlike)
+  app.get('/users/:id/likes', authenticated, userController.getLikesPage)
 
   app.get('/users/:id/tweets', authenticated, userController.getUserProfile)
   app.get('/users/:id/edit', authenticated, userController.editUserProfile)
