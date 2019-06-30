@@ -147,7 +147,6 @@ const userController = {
         isReplied: req.user.Replies.map(r => r.id).includes(a.id),
         isLiked: req.user.LikedTweets.map(l => l.id).includes(a.id)
       }))
-      console.log(tweets)
       return res.render('profile', { user, tweets })
     })
   },
@@ -160,7 +159,6 @@ const userController = {
 
   putUserProfile: (req, res) => {
     if (!req.body.name) {
-      console.log('error')
       req.flash('error_messages', "Name cant be blank")
       return res.redirect('back')
     }
