@@ -160,7 +160,6 @@ const userController = {
   },
 
   putUserProfile: (req, res) => {
-    console.log('here' + req.body)
     if (!req.body.name) {
       console.log('error')
       req.flash('error_messages', "Name cant be blank")
