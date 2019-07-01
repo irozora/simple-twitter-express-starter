@@ -51,7 +51,6 @@ const tweetController = {
       description: req.body.tweet,
       UserId: req.body.UserId
     }).then(() => {
-      req.flash('success_messages', 'restaurant was successfully created')
       return res.redirect('/tweets')
     })
   },
@@ -65,8 +64,6 @@ const tweetController = {
         { model: Reply, include: User, order: [['createdAt', 'DESC']] }
       ]
     })
-    console.log('LikedUsers', tweet.LikedUsers)
-    console.log('LikedUsers', tweet.Replies)
 
     tweet.isLiked = tweet.LikedUsers.some(a => a.id === req.user.id)
       ? true
@@ -82,8 +79,17 @@ const tweetController = {
         { model: Tweet, as: 'LikedTweets' }
       ]
     })
-
     return res.render('reply', { tweet: tweet, user: user })
+  },
+
+  postReply: (req, res) => {
+    return Reply.create({
+      TweetId: req.params.tweet_id,
+      UserId: req.user.id,
+      comment: req.body.tweet
+    }).then(() => {
+      return res.redirect(`/tweets/${req.params.tweet_id}/replies`)
+    })
   }
 }
 

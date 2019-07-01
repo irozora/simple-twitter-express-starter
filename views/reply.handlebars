@@ -92,5 +92,22 @@
       </div>
     </div>
     {{/each}}
+    <div class="add-tweets">
+      <div class="avatar">
+        <div style="background-image:url({{currentUser.avatar}})" class="avatar40px"></div>
+      </div>
+      <div class="tweets-content">
+        <form action="/tweets/{{tweet.id}}/replies" method="POST">
+          <textarea type="text" rows="4" name="tweet" placeholder="新增留言 ..." id="tweetInput" required>
+              </textarea>
+          <input type="hidden" name="UserId" value="{{currentUser.id}}" />
+          <span class="feedback">140</span>
+          <div class="bottom-option">
+            <button class="Button-primary Button-Tweet disabled" id="tweetButton" disabled>Tweet</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
+<script src="/javascripts/tweet.js"></script>
