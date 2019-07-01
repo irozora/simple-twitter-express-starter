@@ -1,16 +1,16 @@
 const db = require('../models')
 const { User, Tweet, Reply, Like, Followship } = db
+const helpers = require('../_helpers')
 
 const tweetController = {
   getTweet: async (req, res) => {
     let whereQuery = {}
     const findFollowings = await Followship.findAll({
-      where: { followerId: req.user.id }
+      where: { followerId: helpers.getUser(req).id }
     })
     const followingsId = findFollowings.map(f => f.followingId)
 
-    whereQuery['UserId'] =
-      findFollowings.length > 0 ? [followingsId, req.user.id] : req.user.id
+    whereQuery['UserId'] = findFollowings.length > 0 ? [followingsId, helpers.getUser(req).id] : helpers.getUser(req).id
 
     findFollowings.forEach(f => followingsId.push(f.followingId))
 
@@ -22,8 +22,8 @@ const tweetController = {
     const data = tweets.map(t => ({
       ...t.dataValues,
       description: t.description.substring(0, 100),
-      isLiked: t.LikedUsers.map(a => a.id).includes(req.user.id),
-      isReplied: t.Replies.map(b => b.id).includes(req.user.id)
+      isLiked: t.LikedUsers.map(a => a.id).includes(helpers.getUser(req).id),
+      isReplied: t.Replies.map(b => b.id).includes(helpers.getUser(req).id)
     }))
 
     const users = await User.findAll({
@@ -35,7 +35,10 @@ const tweetController = {
         ...user.dataValues,
         introduction: user.introduction.substring(0, 50),
         FollowerCount: user.Followers.length,
-        isFollowed: req.user.Followings.map(d => d.id).includes(user.id)
+        isFollowed: helpers
+          .getUser(req)
+          .Followings.map(d => d.id)
+          .includes(user.id)
       }))
       .sort((a, b) => b.FollowerCount - a.FollowerCount)
       .slice(0, 10)
@@ -65,15 +68,12 @@ const tweetController = {
       ]
     })
 
-    tweet.isLiked = tweet.LikedUsers.some(a => a.id === req.user.id)
-      ? true
-      : false
-    tweet.isReplied = tweet.Replies.some(b => b.UserId.id === req.user.id)
-      ? true
-      : false
+    tweet.isLiked = tweet.LikedUsers.some(a => a.id === helpers.getUser(req).id) ? true : false
+    tweet.isReplied = tweet.Replies.some(b => b.UserId.id === helpers.getUser(req).id) ? true : false
 
     const user = await User.findByPk(tweet.UserId, {
       include: [
+        Tweet,
         { model: User, as: 'Followers' },
         { model: User, as: 'Followings' },
         { model: Tweet, as: 'LikedTweets' }
@@ -85,7 +85,7 @@ const tweetController = {
   postReply: (req, res) => {
     return Reply.create({
       TweetId: req.params.tweet_id,
-      UserId: req.user.id,
+      UserId: helpers.getUser(req).id,
       comment: req.body.tweet
     }).then(() => {
       return res.redirect(`/tweets/${req.params.tweet_id}/replies`)
