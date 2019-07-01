@@ -82,7 +82,7 @@
 }
 
 .home-page > .home-col-left > .view-tweets > .individual-tweet {
-  height: 110px;
+  height: 120px;
   border-bottom: 1px solid var(--bgColor);
   padding: 10px 15px;
   display: -webkit-box;
@@ -205,8 +205,8 @@
   display: grid;
   -ms-grid-columns: 35% 65%;
   grid-template-columns: 35% 65%;
-  -ms-grid-rows: 115px;
-  grid-template-rows: 115px;
+  -ms-grid-rows: 140px;
+  grid-template-rows: 140px;
   grid-template-areas: 'user-avatar user-info';
   border-bottom: 1px solid var(--bgColor);
   margin-bottom: 15px;
@@ -225,8 +225,8 @@
   grid-area: user-info;
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: 25px 50px 30px;
-  grid-template-rows: 25px 50px 30px;
+  -ms-grid-rows: 25px 65px 30px;
+  grid-template-rows: 25px 65px 30px;
   -ms-grid-columns: 1fr;
   grid-template-columns: 1fr;
   grid-template-areas: 'popular-name' 'introduction' 'follow-button';
