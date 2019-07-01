@@ -73,6 +73,7 @@ const tweetController = {
 
     const user = await User.findByPk(tweet.UserId, {
       include: [
+        Tweet,
         { model: User, as: 'Followers' },
         { model: User, as: 'Followings' },
         { model: Tweet, as: 'LikedTweets' }

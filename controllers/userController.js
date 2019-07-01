@@ -52,7 +52,7 @@ const userController = {
         { model: Tweet, as: 'LikedTweets', include: [User, Reply, { model: User, as: 'LikedUsers' }] }
       ]
     }).then(user => {
-      const isFollowed = user.Followings.map(d => d.id).includes(helpers.getUser(req).id)
+      const isFollowed = user.Followers.map(d => d.id).includes(helpers.getUser(req).id)
       const likedList = user.LikedTweets.map(liked => ({
         ...liked.dataValues
       }))
@@ -162,7 +162,7 @@ const userController = {
         { model: Tweet, as: 'LikedTweets' }
       ]
     }).then(user => {
-      const isFollowed = user.Followings.map(d => d.id).includes(helpers.getUser(req).id)
+      const isFollowed = user.Followers.map(d => d.id).includes(helpers.getUser(req).id)
       const tweets = user.Tweets.map(a => ({
         ...a.dataValues,
         description: a.dataValues.description.substring(0, 100),
