@@ -28,7 +28,7 @@
       {{else}}
       {{#if isFollowed}}
       <form action="/followships/{{user.id}}?_method=DELETE" method="POST">
-        <button type="submit" class="Button-secondary">Unfollow</button>
+        <button type="submit" class="Button-primary">Unfollow</button>
       </form>
       {{else}}
       <form action="/followships" method="POST">
