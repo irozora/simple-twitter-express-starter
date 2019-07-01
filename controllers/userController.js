@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt-nodejs')
 const imgur = require('imgur-node-api')
 const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID
 const { User, Tweet, Reply, Like, Followship } = db
+const helpers = require('../_helpers')
 
 const userController = {
   signUpPage: (req, res) => {
@@ -51,7 +52,7 @@ const userController = {
         { model: Tweet, as: 'LikedTweets', include: [User, Reply, { model: User, as: 'LikedUsers' }] }
       ]
     }).then(user => {
-      const isFollowed = user.Followings.map(d => d.id).includes(req.user.id)
+      const isFollowed = user.Followings.map(d => d.id).includes(helpers.getUser(req).id)
       const likedList = user.LikedTweets.map(liked => ({
         ...liked.dataValues
       }))
@@ -66,7 +67,7 @@ const userController = {
 
   like: (req, res) => {
     Like.create({
-      UserId: req.user.id,
+      UserId: helpers.getUser(req).id,
       TweetId: req.params.id
     }).then(like => {
       return res.redirect('back')
@@ -75,7 +76,7 @@ const userController = {
 
   unlike: (req, res) => {
     Like.findOne({
-      where: { UserId: req.user.id, TweetId: req.params.id }
+      where: { UserId: helpers.getUser(req).id, TweetId: req.params.id }
     }).then(like => {
       like.destroy().then(() => {
         return res.redirect('back')
@@ -92,7 +93,7 @@ const userController = {
         { model: Tweet, as: 'LikedTweets' }
       ]
     }).then(user => {
-      const isFollowed = user.Followers.map(d => d.id).includes(req.user.id)
+      const isFollowed = user.Followers.map(d => d.id).includes(helpers.getUser(req).id)
       const followingList = user.Followings.map(following => ({
         ...following.dataValues,
         followed: req.user.Followings.map(d => d.id).includes(following.id)
@@ -115,10 +116,13 @@ const userController = {
         { model: Tweet, as: 'LikedTweets' }
       ]
     }).then(user => {
-      const isFollowed = user.Followers.map(d => d.id).includes(req.user.id)
+      const isFollowed = user.Followers.map(d => d.id).includes(helpers.getUser(req).id)
       const followedList = user.Followers.map(follower => ({
         ...follower.dataValues,
-        followed: req.user.Followings.map(d => d.id).includes(follower.id)
+        followed: helpers
+          .getUser(req)
+          .Followings.map(d => d.id)
+          .includes(follower.id)
       }))
 
       res.render('followers', {
@@ -131,7 +135,7 @@ const userController = {
 
   addFollowing: (req, res) => {
     return Followship.create({
-      followerId: req.user.id,
+      followerId: helpers.getUser(req).id,
       followingId: req.body.UserId
     }).then(followship => {
       return res.redirect('back')
@@ -141,7 +145,7 @@ const userController = {
   removeFollowing: (req, res) => {
     return Followship.destroy({
       where: {
-        followerId: req.user.id,
+        followerId: helpers.getUser(req).id,
         followingId: req.params.id
       }
     }).then(() => {
@@ -158,19 +162,25 @@ const userController = {
         { model: Tweet, as: 'LikedTweets' }
       ]
     }).then(user => {
-      const isFollowed = user.Followings.map(d => d.id).includes(req.user.id)
+      const isFollowed = user.Followings.map(d => d.id).includes(helpers.getUser(req).id)
       const tweets = user.Tweets.map(a => ({
         ...a.dataValues,
         description: a.dataValues.description.substring(0, 100),
-        isReplied: req.user.Replies.map(r => r.id).includes(a.id),
-        isLiked: req.user.LikedTweets.map(l => l.id).includes(a.id)
+        isReplied: helpers
+          .getUser(req)
+          .Replies.map(r => r.id)
+          .includes(a.id),
+        isLiked: helpers
+          .getUser(req)
+          .LikedTweets.map(l => l.id)
+          .includes(a.id)
       }))
       return res.render('profile', { user, tweets, isFollowed })
     })
   },
 
   editUserProfile: (req, res) => {
-    User.findByPk(req.user.id).then(user => {
+    User.findByPk(helpers.getUser(req).id).then(user => {
       return res.render('edit', { user })
     })
   },
@@ -184,7 +194,7 @@ const userController = {
     if (file) {
       imgur.setClientID(IMGUR_CLIENT_ID)
       imgur.upload(file.path, (err, img) => {
-        return User.findByPk(req.user.id).then(user => {
+        return User.findByPk(helpers.getUser(req).id).then(user => {
           user
             .update({
               name: req.body.name,
@@ -193,12 +203,12 @@ const userController = {
             })
             .then(user => {
               req.flash('success_messages', 'Your profile was successfully to update')
-              res.redirect(`/users/${req.user.id}/tweets`)
+              res.redirect(`/users/${helpers.getUser(req).id}/tweets`)
             })
         })
       })
     } else {
-      User.findByPk(req.user.id).then(user => {
+      User.findByPk(helpers.getUser(req).id).then(user => {
         user
           .update({
             name: req.body.name,
@@ -207,7 +217,7 @@ const userController = {
           })
           .then(user => {
             req.flash('success_messages', 'Your profile was be successfully updated')
-            return res.redirect(`/users/${req.user.id}/tweets`)
+            return res.redirect(`/users/${helpers.getUser(req).id}/tweets`)
           })
       })
     }
