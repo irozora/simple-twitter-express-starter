@@ -62,8 +62,7 @@ const tweetController = {
   },
 
   deleteTweet: (req, res) => {
-    return Tweet.findByPk(req.params.tweet_id).then(tweet => {
-      tweet.destroy()
+    return Tweet.destroy({ where: { id: req.params.tweet_id } }).then(() => {
       return res.redirect('back')
     })
   },
@@ -105,6 +104,14 @@ const tweetController = {
       comment: req.body.tweet
     }).then(() => {
       return res.redirect(`/tweets/${req.params.tweet_id}/replies`)
+    })
+  },
+
+  deleteReply: (req, res) => {
+    return Reply.destroy({
+      where: { id: req.params.replies_id }
+    }).then(() => {
+      return res.redirect('back')
     })
   }
 }

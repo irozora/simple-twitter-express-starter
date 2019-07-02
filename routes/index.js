@@ -58,11 +58,11 @@ module.exports = (app, passport) => {
     authenticated,
     tweetController.postReply
   )
-  // app.delete(
-  //   '/tweets/:tweet_id/replies',
-  //   authenticated,
-  //   tweetController.deleteReply
-  // )
+  app.delete(
+    '/tweets/:replies_id/replies',
+    authenticated,
+    tweetController.deleteReply
+  )
 
   app.get('/signup', userController.signUpPage)
   app.post('/signup', userController.signUp)

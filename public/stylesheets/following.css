@@ -46,6 +46,7 @@
   padding: 15px 30px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   width: auto;
+  position: relative;
 }
 
 .user-specific-page > .user-info-list > .user-list {

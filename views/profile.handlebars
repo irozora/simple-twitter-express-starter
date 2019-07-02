@@ -77,6 +77,11 @@
     <div class="show-tweets">
       {{#each tweets}}
       <div class="individual-tweet">
+        <div class='user-action' data-id="{{this.id}}"><i class=" fas fa-ellipsis-h"></i></div>
+        <ul class="action-click-option" data-id="{{this.id}}">
+          <li class="deleteTweet" data-id="{{this.id}}">刪除推文</li>
+          <li class="editTweet" data-id="{{this.id}}">編輯推文</li>
+        </ul>
         <div class="col-left">
           <div style="background-image:url({{../user.avatar}})" class="avatar50px">
           </div>
@@ -114,9 +119,8 @@
       </div>
       {{/each}}
     </div>
-
   </div>
-
-
-
 </div>
+<div class="alert-box" style="display: none;     justify-content: center;
+">
+  <script src="/javascripts/tweetAction.js"></script>

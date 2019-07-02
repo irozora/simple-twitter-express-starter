@@ -84,12 +84,10 @@ const userController = {
   },
 
   unlike: (req, res) => {
-    Like.findOne({
+    Like.destroy({
       where: { UserId: helpers.getUser(req).id, TweetId: req.params.id }
-    }).then(like => {
-      like.destroy().then(() => {
-        return res.redirect('back')
-      })
+    }).then(() => {
+      return res.redirect('back')
     })
   },
 

@@ -76,6 +76,7 @@
 }
 
 .profile-show > .show-tweets > .individual-tweet {
+  position: relative;
   background-color: white;
   height: 100%;
   border-bottom: 1px solid var(--bgColor);
