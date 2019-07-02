@@ -10,7 +10,10 @@ const tweetController = {
     })
     const followingsId = findFollowings.map(f => f.followingId)
 
-    whereQuery['UserId'] = findFollowings.length > 0 ? [followingsId, helpers.getUser(req).id] : helpers.getUser(req).id
+    whereQuery['UserId'] =
+      findFollowings.length > 0
+        ? [followingsId, helpers.getUser(req).id]
+        : helpers.getUser(req).id
 
     findFollowings.forEach(f => followingsId.push(f.followingId))
 
@@ -58,6 +61,13 @@ const tweetController = {
     })
   },
 
+  deleteTweet: (req, res) => {
+    return Tweet.findByPk(req.params.tweet_id).then(tweet => {
+      tweet.destroy()
+      return res.redirect('back')
+    })
+  },
+
   getReply: async (req, res) => {
     const tweet = await Tweet.findOne({
       where: { id: req.params.tweet_id },
@@ -68,8 +78,14 @@ const tweetController = {
       ]
     })
 
-    tweet.isLiked = tweet.LikedUsers.some(a => a.id === helpers.getUser(req).id) ? true : false
-    tweet.isReplied = tweet.Replies.some(b => b.UserId.id === helpers.getUser(req).id) ? true : false
+    tweet.isLiked = tweet.LikedUsers.some(a => a.id === helpers.getUser(req).id)
+      ? true
+      : false
+    tweet.isReplied = tweet.Replies.some(
+      b => b.UserId.id === helpers.getUser(req).id
+    )
+      ? true
+      : false
 
     const user = await User.findByPk(tweet.UserId, {
       include: [
