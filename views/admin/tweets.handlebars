@@ -1,4 +1,4 @@
-<div class="admin-user">
+<div class="admin-tweet">
   <ul class="sidebar">
     <li><i class="fas fa-indent"></i><i class="fas fa-outdent"></i></li>
     <li class="active"><a href="/admin/tweets"><i class="far fa-newspaper"></i>Tweets</a></li>
@@ -12,39 +12,64 @@
           <button class="Button-secondary">搜尋</button>
         </form>
       </div>
-      <table class="table">
-        <tr>
-          <th scope="col">User Name</th>
-          <th scope="col">Tweets</th>
-          <th scope="col">Replies</th>
-        </tr>
+      {{#each tweets}}
+      <div class="individual-tweet">
+        <div class="col-left">
+          <div style="background-image:url({{this.User.avatar}})" class="avatar50px">
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="tweet-info">
+            <a href="/users/{{this.User.id}}/tweets">@{{this.User.name}}</a>
+            <span>．{{moment this.createAt}}</span>
+            &nbsp;&nbsp;
+            <a href="/admin/tweets/{{this.id}}/delete">
+              <i class="fas fa-trash fa-lg"></i>
+            </a>
 
-        {{#each tweets}}
-        <tr>
-          <td>
+          </div>
+          <div class="profile-tweet-description">
+            <p>{{this.description}}</p>
+          </div>
+          <div>
+            <span class="comment-section" data-reply="open">
+              <i class="fas fa-caret-right fa-lg"></i>&nbsp;&nbsp;<i
+                class="far fa-comment"></i>&nbsp;&nbsp;{{this.Replies.length}}
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tweet-reply">
+        {{#each this.Replies}}
+        <div class="reply-col-left-blank">
+        </div>
+        <div class="reply-result">
+          <div class="reply-col-left">
             <a href="/users/{{this.User.id}}/tweets">
-              {{this.User.name}}
+              <div style="background-image:url({{this.User.avatar}})" class="avatar50px">
+              </div>
             </a>
-          </td>
-          <td>
-            <a href="/users/{{this.id}}/tweets">
-              {{this.description}}
+          </div>
+          <div class="reply-col-right">
+            <a href="/users/{{this.User.id}}/tweets">
+              @{{this.User.name}}
             </a>
-          </td>
-
-          <td>
-            <a href="/users/{{this.id}}/tweets">
-              {{this.repliedCount}} Replies
-            </a>
-          </td>
-
-        </tr>
+            <span>replied:</span>
+            <p>
+              {{this.comment}}
+            </p>
+          </div>
+        </div>
         {{/each}}
 
-      </table>
+      </div>
+      {{/each}}
+
       <ul>
         <li>
-          <a href="/admin/users?page={{prev}}" aria-label="Previous">
+          <a href="/admin/tweets?page={{prev}}" aria-label="Previous">
             <span aria-hidden="true">«</span>
           </a>
         </li>
@@ -64,3 +89,5 @@
     </div>
   </div>
 </div>
+
+<script src="/javascripts/admin.js"></script>
