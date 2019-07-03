@@ -3,14 +3,15 @@ const userController = require('../controllers/userController.js')
 const tweetController = require('../controllers/tweetController')
 const multer = require('multer')
 const upload = multer({ dest: 'temp/' })
+const helpers = require('../_helpers')
 
 module.exports = (app, passport) => {
   const authenticated = (req, res, next) => {
-    if (req.isAuthenticated()) return next()
+    if (helpers.ensureAuthenticated(req)) return next()
     res.redirect('/signin')
   }
   const authenticatedAdmin = (req, res, next) => {
-    if (req.isAuthenticated()) {
+    if (helpers.ensureAuthenticated(req)) {
       if (req.user.role === 'admin') return next()
       return res.redirect('/')
     }
@@ -19,11 +20,7 @@ module.exports = (app, passport) => {
 
   app.get('/admin/users', authenticatedAdmin, adminController.getUsers)
   app.get('/admin/tweets', authenticatedAdmin, adminController.getTweets)
-  app.get(
-    '/admin/tweets/:id/delete',
-    authenticatedAdmin,
-    adminController.deleteTweet
-  )
+  app.get('/admin/tweets/:id/delete', authenticatedAdmin, adminController.deleteTweet)
 
   app.get('/', authenticated, (req, res) => res.redirect('/tweets'))
   app.get('/tweets', authenticated, tweetController.getTweet)
@@ -36,33 +33,16 @@ module.exports = (app, passport) => {
 
   app.get('/users/:id/tweets', authenticated, userController.getUserProfile)
   app.get('/users/:id/edit', authenticated, userController.editUserProfile)
-  app.put(
-    '/users/:id/edit',
-    authenticated,
-    upload.single('avatar'),
-    userController.putUserProfile
-  )
-  app.get(
-    '/users/:id/followings',
-    authenticated,
-    userController.getFollowingPage
-  )
+  app.put('/users/:id/edit', authenticated, upload.single('avatar'), userController.putUserProfile)
+  app.get('/users/:id/followings', authenticated, userController.getFollowingPage)
   app.get('/users/:id/followers', authenticated, userController.getFollowerPage)
 
   app.post('/followships', authenticated, userController.addFollowing)
   app.delete('/followships/:id', authenticated, userController.removeFollowing)
 
   app.get('/tweets/:tweet_id/replies', authenticated, tweetController.getReply)
-  app.post(
-    '/tweets/:tweet_id/replies',
-    authenticated,
-    tweetController.postReply
-  )
-  app.delete(
-    '/tweets/:replies_id/replies',
-    authenticated,
-    tweetController.deleteReply
-  )
+  app.post('/tweets/:tweet_id/replies', authenticated, tweetController.postReply)
+  app.delete('/tweets/:replies_id/replies', authenticated, tweetController.deleteReply)
 
   app.get('/signup', userController.signUpPage)
   app.post('/signup', userController.signUp)
