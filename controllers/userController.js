@@ -14,7 +14,11 @@ const userController = {
     User.create({
       name: req.body.name,
       email: req.body.email,
-      password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null),
+      password: bcrypt.hashSync(
+        req.body.password,
+        bcrypt.genSaltSync(10),
+        null
+      ),
       introduction: req.body.introduction
     }).then(() => {
       return res.redirect('/signin')
@@ -49,14 +53,19 @@ const userController = {
         Tweet,
         { model: User, as: 'Followers' },
         { model: User, as: 'Followings' },
-        { model: Tweet, as: 'LikedTweets', include: [User, Reply, { model: User, as: 'LikedUsers' }] }
+        {
+          model: Tweet,
+          as: 'LikedTweets',
+          include: [User, Reply, { model: User, as: 'LikedUsers' }]
+        }
       ]
     }).then(user => {
-      const isFollowed = user.Followers.map(d => d.id).includes(helpers.getUser(req).id)
+      const isFollowed = user.Followers.map(d => d.id).includes(
+        helpers.getUser(req).id
+      )
       const likedList = user.LikedTweets.map(liked => ({
         ...liked.dataValues
       }))
-      console.log()
       res.render('likes', {
         user: user,
         isFollowed: isFollowed,
@@ -75,12 +84,10 @@ const userController = {
   },
 
   unlike: (req, res) => {
-    Like.findOne({
+    Like.destroy({
       where: { UserId: helpers.getUser(req).id, TweetId: req.params.id }
-    }).then(like => {
-      like.destroy().then(() => {
-        return res.redirect('back')
-      })
+    }).then(() => {
+      return res.redirect('back')
     })
   },
 
@@ -93,7 +100,9 @@ const userController = {
         { model: Tweet, as: 'LikedTweets' }
       ]
     }).then(user => {
-      const isFollowed = user.Followers.map(d => d.id).includes(helpers.getUser(req).id)
+      const isFollowed = user.Followers.map(d => d.id).includes(
+        helpers.getUser(req).id
+      )
       const followingList = user.Followings.map(following => ({
         ...following.dataValues,
         followed: req.user.Followings.map(d => d.id).includes(following.id)
@@ -116,7 +125,9 @@ const userController = {
         { model: Tweet, as: 'LikedTweets' }
       ]
     }).then(user => {
-      const isFollowed = user.Followers.map(d => d.id).includes(helpers.getUser(req).id)
+      const isFollowed = user.Followers.map(d => d.id).includes(
+        helpers.getUser(req).id
+      )
       const followedList = user.Followers.map(follower => ({
         ...follower.dataValues,
         followed: helpers
@@ -162,7 +173,9 @@ const userController = {
         { model: Tweet, as: 'LikedTweets' }
       ]
     }).then(user => {
-      const isFollowed = user.Followers.map(d => d.id).includes(helpers.getUser(req).id)
+      const isFollowed = user.Followers.map(d => d.id).includes(
+        helpers.getUser(req).id
+      )
       const tweets = user.Tweets.map(a => ({
         ...a.dataValues,
         description: a.dataValues.description.substring(0, 100),
@@ -202,7 +215,10 @@ const userController = {
               avatar: file ? img.data.link : user.avatar
             })
             .then(user => {
-              req.flash('success_messages', 'Your profile was successfully to update')
+              req.flash(
+                'success_messages',
+                'Your profile was successfully to update'
+              )
               res.redirect(`/users/${helpers.getUser(req).id}/tweets`)
             })
         })
@@ -216,7 +232,10 @@ const userController = {
             avatar: user.avatar
           })
           .then(user => {
-            req.flash('success_messages', 'Your profile was be successfully updated')
+            req.flash(
+              'success_messages',
+              'Your profile was be successfully updated'
+            )
             return res.redirect(`/users/${helpers.getUser(req).id}/tweets`)
           })
       })

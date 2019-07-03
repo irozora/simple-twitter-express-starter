@@ -20,6 +20,17 @@
     <div class="view-tweets">
       {{#each tweets}}
       <div class="individual-tweet">
+        <div class='user-action' data-id="{{this.id}}"><i class=" fas fa-ellipsis-h"></i></div>
+        <ul class="action-click-option" data-id="{{this.id}}">
+          {{#ifCond this.User.id ../currentUser.id}}
+
+          <li class="deleteTweet" data-id="{{this.id}}">刪除推文</li>
+          <li class="editTweet" data-id="{{this.id}}">編輯推文</li>
+          {{else}}
+          <li class="savaTweet" data-id="{{this.id}}">收藏推文</li>
+          {{/ifCond}}
+        </ul>
+
         <div class="col-left">
           <div style="background-image:url({{this.User.avatar}})" class="avatar50px">
           </div>
@@ -38,8 +49,6 @@
               <i class="far fa-comment"></i>
               {{/if}}
               &nbsp;&nbsp;{{this.Replies.length}}</a>
-
-
             {{#if isLiked}}
             <form action="/tweets/{{this.id}}/unlike" method="POST">
               <button type="submit"><i class="fas fa-heart"></i>
@@ -90,4 +99,10 @@
     {{/each}}
   </div>
 </div>
+<div class="alert-box" style="display: none;     justify-content: center;
+">
+
+</div>
+
 <script src="/javascripts/tweet.js"></script>
+<script src="/javascripts/tweetAction.js"></script>

@@ -79,6 +79,13 @@
     <p>Reply</p>
     {{#each tweet.Replies}}
     <div class="user-list">
+      {{#ifCond this.User.id ../currentUser.id}}
+      <div class='user-action' data-id="{{this.id}}"><i class=" fas fa-ellipsis-h"></i></div>
+      <ul class="action-click-option" data-id="{{this.id}}">
+        <li class="deleteReply" data-id="{{this.id}}">刪除回覆</li>
+        <li class="editReply" data-id="{{this.id}}">編輯回覆</li>
+      </ul>
+      {{/ifCond}}
       <div class="col-left">
         <div style="background-image:url({{this.User.avatar}})" class="avatar70px">
         </div>
@@ -110,4 +117,9 @@
     </div>
   </div>
 </div>
+<div class="alert-box" style="display: none;     justify-content: center;
+">
+
+</div>
 <script src="/javascripts/tweet.js"></script>
+<script src="/javascripts/replyAction.js"></script>

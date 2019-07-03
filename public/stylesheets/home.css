@@ -88,6 +88,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
 }
 
 .home-page > .home-col-left > .view-tweets > .individual-tweet > .col-left {

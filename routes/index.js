@@ -19,7 +19,7 @@ module.exports = (app, passport) => {
 
   app.get('/admin/users', authenticatedAdmin, adminController.getUsers)
   app.get('/admin/tweets', authenticatedAdmin, adminController.getTweets)
-  app.delete(
+  app.get(
     '/admin/tweets/:id/delete',
     authenticatedAdmin,
     adminController.deleteTweet
@@ -28,6 +28,7 @@ module.exports = (app, passport) => {
   app.get('/', authenticated, (req, res) => res.redirect('/tweets'))
   app.get('/tweets', authenticated, tweetController.getTweet)
   app.post('/tweets', authenticated, tweetController.postTweet)
+  app.delete('/tweets/:tweet_id', authenticated, tweetController.deleteTweet)
 
   app.post('/tweets/:id/like', authenticated, userController.like)
   app.post('/tweets/:id/unlike', authenticated, userController.unlike)
@@ -57,11 +58,11 @@ module.exports = (app, passport) => {
     authenticated,
     tweetController.postReply
   )
-  // app.delete(
-  //   '/tweets/:tweet_id/replies',
-  //   authenticated,
-  //   tweetController.deleteReply
-  // )
+  app.delete(
+    '/tweets/:replies_id/replies',
+    authenticated,
+    tweetController.deleteReply
+  )
 
   app.get('/signup', userController.signUpPage)
   app.post('/signup', userController.signUp)

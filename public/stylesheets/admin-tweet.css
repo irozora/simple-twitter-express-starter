@@ -1,0 +1,175 @@
+.admin-tweet {
+  height: 100%;
+  overflow: hidden;
+  padding-top: 48px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 180px 1fr;
+  grid-template-columns: 180px 1fr;
+  -ms-grid-rows: 100vh;
+  grid-template-rows: 100vh;
+  grid-template-areas: 'sidebar main';
+}
+
+.admin-tweet .sidebar {
+  font-size: 15px;
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: sidebar;
+  background-color: #fff;
+}
+
+.admin-tweet .sidebar li a {
+  color: var(--Grey);
+  padding: 10px 20px;
+  width: 100%;
+  display: inline-block;
+}
+
+.admin-tweet .sidebar li a i {
+  margin-right: 5px;
+}
+
+.admin-tweet .sidebar li:nth-child(1) {
+  color: var(--Grey);
+  text-align: right;
+  padding: 10px;
+}
+
+.admin-tweet .sidebar li:nth-child(1) i {
+  font-size: 18px;
+}
+
+.admin-tweet .sidebar .fa-indent {
+  display: none;
+}
+
+.admin-tweet .main-content {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: main;
+  margin: 100px auto;
+  overflow: auto;
+}
+
+.admin-tweet .main-content .results {
+  width: 1000px;
+  background-color: #fff;
+  padding: 30px;
+}
+
+.admin-tweet .main-content .results .search-field {
+  margin-bottom: 15px;
+}
+
+.admin-tweet .main-content .results .search-field form input {
+  font-size: 14px;
+  border-radius: 100px;
+  padding: 7px 12px;
+  border: 1px solid #ddd;
+  margin-right: 10px;
+}
+
+
+.admin-tweet .main-content .results .individual-tweet {
+  background-color: white;
+  height: 100%;
+  border-top: 1px solid var(--bgColor);
+  padding: 10px 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.admin-tweet >.main-content .results  .individual-tweet > .col-left, .col-right{
+  padding:10px; 
+}
+
+
+.admin-tweet .main-content .results .individual-tweet .profile-tweet-description {
+  padding-top: 10px;
+  padding-bottom: 10px; 
+}
+
+.profile-tweets-reaction {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.admin-tweet .main-content .results  .individual-tweet  .col-right .profile-tweets-reaction> a, button {
+  font-size: 14px;
+  color: var(--Grey);
+  margin-right: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+.tweet-reply {
+  display:none;
+  padding: 10px 15px;
+}
+
+.reply-col-left-blank {
+  display: inline-block;
+  width:10%;
+  padding:10px;
+  height: 100px;
+}
+
+.reply-result {
+  width: 80%;
+  display: inline-block;
+}
+
+.reply-col-left {
+  vertical-align : top;
+  width: 10%;
+  display: inline-block;
+  padding:10px;
+}
+
+.reply-col-right {
+  display: inline-block;
+  width: 80%;
+  padding:10px;
+}
+
+.comment-switch{
+  vertical-align:middle
+}
+
+.open-it {
+  display: block;
+}
+
+.comment-section {
+  cursor: pointer;
+}
+
+.admin-tweet .main-content ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+}
+
+.admin-tweet .main-content ul li a {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #007bff;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+
+
+.fa-trash {
+  cursor: pointer;
+  color: red
+}

@@ -15,6 +15,18 @@
   --titleWord: 'Kaushan Script', cursive;
 }
 
+.dark-bg {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 20;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
 /* 常用按鈕樣式 */
 
 .Button-Tweet {
@@ -115,6 +127,68 @@
   color: red;
   background: #fff;
   height: 35px;
+}
+
+.user-action {
+  position: absolute;
+  right: 15px;
+  top: 5px;
+  cursor: pointer;
+  color: var(--Grey);
+}
+.user-action:hover {
+  color: #000;
+}
+
+.action-click-option {
+  background-clip: padding-box;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  right: 15px;
+  padding: 5px 0px;
+  top: 25px;
+  display: none;
+}
+
+.action-click-option > li {
+  cursor: pointer;
+  border: solid #fff;
+  border-width: 1px 0;
+  color: #1d2129;
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+  line-height: 24px;
+  padding: 0px 10px;
+}
+
+.action-click-option > li:hover {
+  background-color: var(--hoverColorLight);
+}
+
+.delete-box {
+  width: 300px;
+  border-radius: 3px;
+  box-shadow: 0 2px 26px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  position: relative;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.delete-box > form > div:nth-child(2) {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.delete-confirm {
+  display: flex;
+  justify-content: center;
+  top: 40%;
+  position: fixed;
+  z-index: 30;
+  width: inherit;
 }
 
 /*Basic Setting*/
