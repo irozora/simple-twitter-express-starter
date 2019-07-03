@@ -48,12 +48,14 @@
       <div class="col-left">
         <div style="background-image:url({{this.User.avatar}})" class="avatar70px">
         </div>
-        <div class="like-info">
-          <a href="/users/{{this.UserId}}/tweets">@{{this.User.name}}</a>
-        </div>
       </div>
 
       <div class="col-right">
+        <div class="like-info">
+          <a href="/users/{{this.UserId}}/tweets">@{{this.User.name}}</a>
+          <span>．{{moment this.createdAt}}</span>
+        </div>
+
         <p>{{this.description}}</p>
         <div class="reaction">
           <a href="/tweets/{{this.id}}/replies">

@@ -51,7 +51,7 @@
       <div class="col-right">
         <div class="tweet-info">
           <a href="/users/{{tweet.User.id}}/tweets">@{{tweet.User.name}}</a>
-          <span>．{{moment tweet.createAt}}</span>
+          <span>．{{moment tweet.createdAt}}</span>
         </div>
         <p>{{tweet.description}}</p>
         <div class="reaction">
@@ -93,7 +93,7 @@
       <div class="col-right">
         <div class="tweet-info">
           <a href="/users/{{this.User.id}}/tweets">@{{this.User.name}}</a>
-          <span>．{{moment this.createAt}}</span>
+          <span>．{{moment this.createdAt}}</span>
         </div>
         <p>{{this.comment}}</p>
       </div>
