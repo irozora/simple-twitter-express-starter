@@ -19,7 +19,8 @@ const tweetController = {
 
     const tweets = await Tweet.findAll({
       where: whereQuery,
-      include: [User, Reply, { model: User, as: 'LikedUsers' }]
+      include: [User, Reply, { model: User, as: 'LikedUsers' }],
+      order: [['createdAt', 'DESC']]
     })
 
     const data = tweets.map(t => ({
@@ -81,7 +82,7 @@ const tweetController = {
       ? true
       : false
     tweet.isReplied = tweet.Replies.some(
-      b => b.UserId === helpers.getUser(req).id
+      b => b.UserId.id === helpers.getUser(req).id
     )
       ? true
       : false
