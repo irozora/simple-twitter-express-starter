@@ -160,26 +160,16 @@
   -ms-grid-row: 4;
   -ms-grid-column: 1;
   grid-area: reaction;
+}
+
+.reaction {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.home-page
-  > .home-col-left
-  > .view-tweets
-  > .individual-tweet
-  > .col-right
-  > .reaction
-  > a,
-.home-page
-  > .home-col-left
-  > .view-tweets
-  > .individual-tweet
-  > .col-right
-  > .reaction
-  > form
-  > button {
+.reaction > a,
+.reaction > form > button {
   font-size: 14px;
   color: var(--Grey);
   margin-right: 30px;
@@ -256,4 +246,3 @@
   grid-area: follow-button;
   text-align: right;
 }
-/*# sourceMappingURL=home.css.map */

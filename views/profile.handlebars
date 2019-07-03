@@ -1,76 +1,64 @@
 <div class="user-profile-page">
   <div class="profile-header">
-    <img src="https://picsum.photos/1000/300" alt="">
-    <div class="profile-avatar-position">
-      <a href="/users/{{user.id}}/tweets"><img src="{{user.avatar}}" alt="" class="profile-avatar"></a>
-    </div>
+    <div class="profile-bg"></div>
+
   </div>
 
   <div class="profile-nav">
     <div class="left">
-
     </div>
     <div class="right">
       <ul class="right-list">
         <li class="item">
           <a href="/users/{{user.id}}/tweets">
-            <div>
-              <p>Tweets</p>
-              <p>{{user.Tweets.length}}</p>
-            </div>
+            Tweets
+            <span>{{user.Tweets.length}}</span>
           </a>
         </li>
         <li class="item">
           <a href="/users/{{user.id}}/followers">
-            <div>
-              <p>Follower</p>
-              <p>{{user.Followers.length}}</p>
-            </div>
+            Follower
+            <span>{{user.Followers.length}}</span>
           </a>
         </li>
         <li class="item">
           <a href="/users/{{user.id}}/followings">
-            <div>
-              <p>Following</p>
-              <p>{{user.Followings.length}}</p>
-            </div>
+            Following
+            <span>{{user.Followings.length}}</span>
           </a>
         </li>
         <li class="item">
           <a href="/users/{{user.id}}/likes">
-            <div>
-              <p>Like</p>
-              <p>{{user.LikedTweets.length}}</p>
-            </div>
+            Like
+            <span>{{user.LikedTweets.length}}</span>
           </a>
         </li>
 
-        <li class="item">
-          <div>
-            {{#ifCond user.id currentUser.id}}
-            <a href="/users/{{currentUser.id}}/edit" class="Button-secondary">Edit Profile</a>
-            {{else}}
-            {{#if isFollowed}}
-            <form action="/followships/{{user.id}}?_method=DELETE" method="POST">
-              <button type="submit" class="Button-primary">Unfollow</button>
-            </form>
-            {{else}}
-            <form action="/followships" method="POST">
-              <button type="submit" class="Button-secondary">Follow</button>
-            </form>
-            {{/if}}
-            {{/ifCond}}
-          </div>
-        </li>
+
       </ul>
     </div>
   </div>
 
   <div class="profile-show">
+    <div class="profile-avatar" style="background-image: url({{user.avatar}});"></div>
+    <div class="profile-follow-button">
+      {{#ifCond user.id currentUser.id}}
+      <a href="/users/{{currentUser.id}}/edit" class="Button-secondary" style="border-radius:0">Edit Profile</a>
+      {{else}}
+      {{#if isFollowed}}
+      <form action="/followships/{{user.id}}?_method=DELETE" method="POST">
+        <button type="submit" class="Button-primary" style="border-radius:0">Unfollow</button>
+      </form>
+      {{else}}
+      <form action="/followships" method="POST">
+        <input type="hidden" name="UserId" value="{{user.id}}">
+        <button type="submit" class="Button-secondary" style="border-radius:0">Follow</button>
+      </form>
+      {{/if}}
+      {{/ifCond}}
+    </div>
     <div class="profile-info">
-      <a href="/users/{{user.id}}/tweets">
-        <h1>{{user.name}}</h1>
-      </a>
+      <h1>{{user.name}}</h1>
       <p>{{user.introduction}}</p>
     </div>
 

@@ -81,7 +81,7 @@ const tweetController = {
       ? true
       : false
     tweet.isReplied = tweet.Replies.some(
-      b => b.UserId.id === helpers.getUser(req).id
+      b => b.UserId === helpers.getUser(req).id
     )
       ? true
       : false

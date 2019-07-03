@@ -23,7 +23,7 @@
             <a href="/users/{{this.User.id}}/tweets">@{{this.User.name}}</a>
             <span>．{{moment this.createAt}}</span>
             &nbsp;&nbsp;
-            <a href="/admin/tweets/{{this.id}}/delete">
+            <a href="/admin/tweets/{{this.id}}/delete" style="float: right;">
               <i class="fas fa-trash fa-lg"></i>
             </a>
 
@@ -33,8 +33,7 @@
           </div>
           <div>
             <span class="comment-section" data-reply="open">
-              <i class="fas fa-caret-right fa-lg"></i>&nbsp;&nbsp;<i
-                class="far fa-comment"></i>&nbsp;&nbsp;{{this.Replies.length}}
+              <i class="fas fa-caret-right fa-lg"></i>&nbsp;&nbsp;<i class="far fa-comment"></i>&nbsp;&nbsp;{{this.Replies.length}}
             </span>
           </div>
         </div>
