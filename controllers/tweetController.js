@@ -77,14 +77,13 @@ const tweetController = {
         { model: Reply, include: User }
       ]
     })
-
     tweet.Replies.sort((a, b) => b.createdAt - a.createdAt)
 
     tweet.isLiked = tweet.LikedUsers.some(a => a.id === helpers.getUser(req).id)
       ? true
       : false
     tweet.isReplied = tweet.Replies.some(
-      b => b.UserId.id === helpers.getUser(req).id
+      b => b.UserId === helpers.getUser(req).id
     )
       ? true
       : false
