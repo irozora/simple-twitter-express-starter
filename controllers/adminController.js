@@ -44,7 +44,6 @@ const adminController = {
   },
 
   getTweets: (req, res) => {
-
     let offset = 0
 
     if (req.query.page) {
@@ -52,42 +51,34 @@ const adminController = {
     }
 
     Tweet.findAndCountAll({
-      include: [
-        User,
-        { model: Reply, include: [User] },
-      ],
+      include: [User, { model: Reply, include: [User] }],
       offset: offset,
       limit: pageLimit,
       distinct: true
-    })
-      .then(result => {
-        let page = Number(req.query.page) || 1
-        let pages = Math.ceil(result.count / pageLimit)
-        let totalPage = Array.from({
-          length: pages
-        }).map((item, index) => index + 1)
+    }).then(result => {
+      let page = Number(req.query.page) || 1
+      let pages = Math.ceil(result.count / pageLimit)
+      let totalPage = Array.from({
+        length: pages
+      }).map((item, index) => index + 1)
 
-        let prev = page - 1 < 1 ? 1 : page - 1
-        let next = page + 1 > pages ? pages : page + 1
+      let prev = page - 1 < 1 ? 1 : page - 1
+      let next = page + 1 > pages ? pages : page + 1
 
-        const data = result.rows.map(a => ({
-          ...a.dataValues,
-          description: a.dataValues.description.substring(0, 20),
-          repliedCount: a.Replies.length
-        }))
+      const data = result.rows.map(a => ({
+        ...a.dataValues,
+        description: a.dataValues.description.substring(0, 20),
+        repliedCount: a.Replies.length
+      }))
 
-        data.forEach(a => {
-          console.log(a.Replies)
-        })
-        res.render('admin/tweets', {
-          tweets: data,
-          page: page,
-          totalPage: totalPage,
-          prev: prev,
-          next: next
-        })
-
+      res.render('admin/tweets', {
+        tweets: data,
+        page: page,
+        totalPage: totalPage,
+        prev: prev,
+        next: next
       })
+    })
   },
 
   deleteTweet: (req, res) => {

@@ -64,7 +64,7 @@
             &nbsp;&nbsp;{{tweet.Replies.length}}</a>
 
           {{#if tweet.isLiked}}
-          <form action="/tweets/{{this.id}}/unlike" method="POST">
+          <form action="/tweets/{{tweet.id}}/unlike" method="POST">
             <button type="submit"><i class="fas fa-heart"></i>
               {{else}}
               <form action="/tweets/{{tweet.id}}/like" method="POST">
