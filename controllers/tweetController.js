@@ -74,9 +74,11 @@ const tweetController = {
       include: [
         User,
         { model: User, as: 'LikedUsers' },
-        { model: Reply, include: User, order: [['createdAt', 'DESC']] }
+        { model: Reply, include: User }
       ]
     })
+
+    tweet.Replies.sort((a, b) => b.createdAt - a.createdAt)
 
     tweet.isLiked = tweet.LikedUsers.some(a => a.id === helpers.getUser(req).id)
       ? true
@@ -95,7 +97,14 @@ const tweetController = {
         { model: Tweet, as: 'LikedTweets' }
       ]
     })
-    return res.render('reply', { tweet: tweet, user: user })
+    const isFollowed = user.Followers.map(d => d.id).includes(
+      helpers.getUser(req).id
+    )
+    return res.render('reply', {
+      tweet: tweet,
+      user: user,
+      isFollowed: isFollowed
+    })
   },
 
   postReply: (req, res) => {
