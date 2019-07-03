@@ -58,7 +58,15 @@ const userController = {
     }).then(user => {
       const isFollowed = user.Followers.map(d => d.id).includes(helpers.getUser(req).id)
       let likedList = user.LikedTweets.map(liked => ({
-        ...liked.dataValues
+        ...liked.dataValues,
+        isLiked: helpers
+          .getUser(req)
+          .LikedTweets.map(l => l.id)
+          .includes(liked.id),
+        isReplied: helpers
+          .getUser(req)
+          .Replies.map(r => r.id)
+          .includes(liked.id)
       }))
       likedList = likedList.sort((a, b) => b.Like.createdAt - a.Like.createdAt)
 
