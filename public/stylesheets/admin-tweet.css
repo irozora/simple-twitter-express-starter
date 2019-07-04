@@ -30,20 +30,6 @@
   margin-right: 5px;
 }
 
-.admin-tweet .sidebar li:nth-child(1) {
-  color: var(--Grey);
-  text-align: right;
-  padding: 10px;
-}
-
-.admin-tweet .sidebar li:nth-child(1) i {
-  font-size: 18px;
-}
-
-.admin-tweet .sidebar .fa-indent {
-  display: none;
-}
-
 .admin-tweet .main-content {
   -ms-grid-row: 1;
   -ms-grid-column: 2;
