@@ -60,13 +60,26 @@
     </div>
 
     <div class="show-tweets">
+      <div class="tweets-content">
+        <form action="/tweets" method="POST">
+          <textarea type="text" rows="4" name="tweet" placeholder="有什麼新鮮事？" id="tweetInput" required>
+                </textarea>
+          <input type="hidden" name="UserId" value="{{currentUser.id}}" />
+          <span class="feedback">140</span>
+          <div class="bottom-option">
+            <button class="Button-primary Button-Tweet disabled" id="tweetButton" disabled>Tweet</button>
+          </div>
+        </form>
+      </div>
       {{#each tweets}}
       <div class="individual-tweet">
+        {{#ifCond ../user.id ../currentUser.id}}
         <div class='user-action' data-id="{{this.id}}"><i class=" fas fa-ellipsis-h"></i></div>
         <ul class="action-click-option" data-id="{{this.id}}">
           <li class="deleteTweet" data-id="{{this.id}}">刪除推文</li>
           <li class="editTweet" data-id="{{this.id}}">編輯推文</li>
         </ul>
+        {{/ifCond}}
         <div class="col-left">
           <div style="background-image:url({{../user.avatar}})" class="avatar50px">
           </div>
@@ -106,6 +119,7 @@
     </div>
   </div>
 </div>
-<div class="alert-box" style="display: none;     justify-content: center;
+<div class="alert-box" style="display: none; justify-content: center;
 ">
   <script src="/javascripts/tweetAction.js"></script>
+  <script src="/javascripts/tweet.js"></script>

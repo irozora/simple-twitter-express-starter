@@ -30,20 +30,6 @@
   margin-right: 5px;
 }
 
-.admin-user .sidebar li:nth-child(1) {
-  color: var(--Grey);
-  text-align: right;
-  padding: 10px;
-}
-
-.admin-user .sidebar li:nth-child(1) i {
-  font-size: 18px;
-}
-
-.admin-user .sidebar .fa-indent {
-  display: none;
-}
-
 .admin-user .main-content {
   -ms-grid-row: 1;
   -ms-grid-column: 2;

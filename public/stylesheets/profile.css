@@ -109,6 +109,12 @@
   width: 534px;
 }
 
+.profile-show > .show-tweets > .tweets-content {
+  background-color: #e8f5fd;
+  padding: 15px;
+  border-bottom: 1px solid var(--bgColor);
+}
+
 .profile-show > .show-tweets > .individual-tweet {
   height: fit-content;
   position: relative;
