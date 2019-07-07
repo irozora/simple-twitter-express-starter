@@ -122,7 +122,7 @@ const userController = {
       }))
       followingList = followingList.sort(
         (a, b) => b.Followship.createdAt - a.Followship.createdAt
-      )
+      ).reverse()
       res.render('followings', {
         user: user,
         isFollowed: isFollowed,
@@ -152,7 +152,7 @@ const userController = {
       }))
       followedList = followedList.sort(
         (a, b) => b.Followship.createdAt - a.Followship.createdAt
-      )
+      ).reverse();
 
       res.render('followers', {
         user: user,
@@ -163,9 +163,13 @@ const userController = {
   },
 
   addFollowing: (req, res) => {
+    req.body.id = Number(req.body.id);
+    if (helpers.getUser(req).id === req.body.id) {
+      return res.send('cannot follow yourself!');
+    }
     return Followship.create({
       followerId: helpers.getUser(req).id,
-      followingId: req.body.UserId
+      followingId: req.body.id
     }).then(followship => {
       return res.redirect('back')
     })
@@ -213,6 +217,7 @@ const userController = {
   },
 
   editUserProfile: (req, res) => {
+    if (helpers.getUser(req).id !== Number(req.params.id)) return res.redirect('/');
     User.findByPk(helpers.getUser(req).id).then(user => {
       return res.render('edit', { user })
     })

@@ -24,7 +24,7 @@ describe('# followship request', () => {
         await db.User.create({})
       })
 
-      it('can not follow self', (done) => {
+      it('can not follow self', (done) => {        
         request(app)
           .post('/followships')
           .send('id=1')
@@ -33,10 +33,10 @@ describe('# followship request', () => {
           .end(function(err, res) {
             if (err) return done(err);
             db.User.findByPk(1,{include: [
-                { model: db.User, as: 'Follower' },
-                { model: db.User, as: 'Following' } 
+                { model: db.User, as: 'Followers' },
+                { model: db.User, as: 'Followings' } 
               ]}).then(user => {
-              user.Following.length.should.equal(0)
+              user.Followings.length.should.equal(0)
               return done();
             })
           });
@@ -51,10 +51,10 @@ describe('# followship request', () => {
           .end(function(err, res) {
             if (err) return done(err);
             db.User.findByPk(1,{include: [
-                { model: db.User, as: 'Follower' },
-                { model: db.User, as: 'Following' } 
+                { model: db.User, as: 'Followers' },
+                { model: db.User, as: 'Followings' } 
               ]}).then(user => {
-              user.Following.length.should.equal(1)
+              user.Followings.length.should.equal(1)
               return done();
             })
           });
@@ -95,10 +95,10 @@ describe('# followship request', () => {
           .end(function(err, res) {
             if (err) return done(err);
             db.User.findByPk(1,{include: [
-                { model: db.User, as: 'Follower' },
-                { model: db.User, as: 'Following' } 
+                { model: db.User, as: 'Followers' },
+                { model: db.User, as: 'Followings' } 
               ]}).then(user => {
-              user.Following.length.should.equal(0)
+              user.Followings.length.should.equal(0)
               return done();
             })
           });

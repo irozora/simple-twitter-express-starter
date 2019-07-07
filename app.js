@@ -49,7 +49,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.listen(port, () => {
+module.exports = app.listen(port, () => {
   db.sequelize.sync()
   console.log(`Example app listening on port 3000!`)
 })

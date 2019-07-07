@@ -19,14 +19,15 @@ describe('# reply request', () => {
         this.getUser = sinon.stub(
           helpers, 'getUser'
         ).returns({id: 1, Following: []});
-
+        
         await db.User.destroy({where: {},truncate: true})
         await db.Tweet.destroy({where: {},truncate: true})
         await db.Reply.destroy({where: {},truncate: true})
-
+        
         await db.User.create({})
-        await db.Tweet.create({UserId: 1})
+        await db.Tweet.create({UserId: 1, description: 'test'})
         await db.Reply.create({UserId: 1, TweetId: 1, comment: 'Tweet1 的 comment'})
+        
       })
 
       it('should render index', (done) => {
@@ -63,7 +64,7 @@ describe('# reply request', () => {
           helpers, 'getUser'
         ).returns({id: 1, Following: []});
         await db.User.create({})
-        await db.Tweet.create({UserId: 1})
+        await db.Tweet.create({UserId: 1, description: 'test'})
       })
 
       it('will redirect to index', (done) => {

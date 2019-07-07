@@ -19,7 +19,7 @@ describe('# user request', () => {
       ).returns(true);
       this.getUser = sinon.stub(
         helpers, 'getUser'
-      ).returns({id: 1, Following: []});
+      ).returns({id: 1, Followings: [], Replies: [], LikedTweets: []});
 
       await db.User.destroy({where: {},truncate: true})
       await db.Tweet.destroy({where: {},truncate: true})
@@ -75,7 +75,7 @@ describe('# user request', () => {
       ).returns(true);
       this.getUser = sinon.stub(
           helpers, 'getUser'
-        ).returns({id: 1, Following: []});
+        ).returns({id: 1, Followings: []});
       await db.User.create({})
       await db.User.create({})
     })
@@ -119,18 +119,19 @@ describe('# user request', () => {
       ).returns(true);
       this.getUser = sinon.stub(
         helpers, 'getUser'
-      ).returns({id: 1, Following: []});
+      ).returns({id: 1, Followings: []});
       await db.User.create({})
     })
 
     describe('successfully update', () => {
       it('will change users intro', (done) => {
         request(app)
-          .post('/users/1/edit')
+          .post('/users/1/edit?_method=PUT')
           .send('name=abc')
           .set('Accept', 'application/json')
           .expect(302)
           .end(function(err, res) {
+            
             if (err) return done(err);
             db.User.findByPk(1).then(user => {
               user.name.should.equal('abc');
@@ -156,7 +157,7 @@ describe('# user request', () => {
       ).returns(true);
       this.getUser = sinon.stub(
         helpers, 'getUser'
-      ).returns({id: 1, Following: []});
+      ).returns({id: 1, Followings: []});
       await db.User.create({name: 'User1'})
       await db.User.create({name: 'User2'})
       await db.User.create({name: 'User3'})
@@ -168,8 +169,8 @@ describe('# user request', () => {
       await db.Followship.create({followerId: 3, followingId: 1})
     })
 
-    describe('go to following page', () => {
-      it('will show all following users', (done) => {
+    describe('go to Followings page', () => {
+      it('will show all Followings users', (done) => {
         request(app)
           .get('/users/1/followings')
           .set('Accept', 'application/json')
@@ -180,7 +181,7 @@ describe('# user request', () => {
             return done();
           });
       })
-      it('following list ordered by desc', (done) => {
+      it('Followings list ordered by desc', (done) => {
         request(app)
           .get('/users/1/followings')
           .set('Accept', 'application/json')
@@ -236,7 +237,7 @@ describe('# user request', () => {
       ).returns(true);
       this.getUser = sinon.stub(
         helpers, 'getUser'
-      ).returns({id: 1, Following: []});
+      ).returns({id: 1, Followings: [], LikedTweets: [], Replies: []});
       await db.User.create({})
       await db.Tweet.create({UserId: 1, description: 'Tweet1'})
       await db.Like.create({UserId: 1, TweetId: 1})

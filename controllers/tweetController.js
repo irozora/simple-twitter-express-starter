@@ -56,7 +56,7 @@ const tweetController = {
   postTweet: (req, res) => {
     return Tweet.create({
       description: req.body.tweet,
-      UserId: req.body.UserId
+      UserId: helpers.getUser(req).id
     }).then(() => {
       return res.redirect('/tweets')
     })
