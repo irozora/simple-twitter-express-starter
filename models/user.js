@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       password: DataTypes.STRING,
       role: DataTypes.STRING,
       avatar: DataTypes.STRING,
-      introduction: DataTypes.TEXT
+      introduction: { type: DataTypes.TEXT, defaultValue: 'Hi, nice to meet you' }
     },
     {}
   )
