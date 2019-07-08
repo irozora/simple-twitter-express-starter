@@ -8,7 +8,7 @@ const helpers = require('../_helpers')
 module.exports = (app, passport) => {
   const authenticated = (req, res, next) => {
     if (helpers.ensureAuthenticated(req)) return next()
-    res.redirect('/signin')
+    res.redirect('/')
   }
   const authenticatedAdmin = (req, res, next) => {
     if (helpers.ensureAuthenticated(req)) {

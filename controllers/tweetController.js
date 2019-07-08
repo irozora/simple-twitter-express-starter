@@ -10,10 +10,7 @@ const tweetController = {
     })
     const followingsId = findFollowings.map(f => f.followingId)
 
-    whereQuery['UserId'] =
-      findFollowings.length > 0
-        ? [followingsId, helpers.getUser(req).id]
-        : helpers.getUser(req).id
+    whereQuery['UserId'] = findFollowings.length > 0 ? [followingsId, helpers.getUser(req).id] : helpers.getUser(req).id
 
     findFollowings.forEach(f => followingsId.push(f.followingId))
 
@@ -56,7 +53,7 @@ const tweetController = {
   postTweet: (req, res) => {
     return Tweet.create({
       description: req.body.tweet,
-      UserId: req.body.UserId
+      UserId: helpers.getUser(req).id
     }).then(() => {
       return res.redirect('/tweets')
     })
@@ -71,22 +68,12 @@ const tweetController = {
   getReply: async (req, res) => {
     const tweet = await Tweet.findOne({
       where: { id: req.params.tweet_id },
-      include: [
-        User,
-        { model: User, as: 'LikedUsers' },
-        { model: Reply, include: User }
-      ]
+      include: [User, { model: User, as: 'LikedUsers' }, { model: Reply, include: User }]
     })
     tweet.Replies.sort((a, b) => b.createdAt - a.createdAt)
 
-    tweet.isLiked = tweet.LikedUsers.some(a => a.id === helpers.getUser(req).id)
-      ? true
-      : false
-    tweet.isReplied = tweet.Replies.some(
-      b => b.UserId === helpers.getUser(req).id
-    )
-      ? true
-      : false
+    tweet.isLiked = tweet.LikedUsers.some(a => a.id === helpers.getUser(req).id) ? true : false
+    tweet.isReplied = tweet.Replies.some(b => b.UserId === helpers.getUser(req).id) ? true : false
 
     const user = await User.findByPk(tweet.UserId, {
       include: [
@@ -96,9 +83,7 @@ const tweetController = {
         { model: Tweet, as: 'LikedTweets' }
       ]
     })
-    const isFollowed = user.Followers.map(d => d.id).includes(
-      helpers.getUser(req).id
-    )
+    const isFollowed = user.Followers.map(d => d.id).includes(helpers.getUser(req).id)
     return res.render('reply', {
       tweet: tweet,
       user: user,
