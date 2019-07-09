@@ -27,30 +27,26 @@ module.exports = {
           introduction: 'Just a fake user passing thru...',
           createdAt: new Date(),
           updatedAt: new Date()
+        },
+        {
+          email: 'user2@example.com',
+          password: bcrypt.hashSync('12345678', bcrypt.genSaltSync(10), null),
+          role: 'user',
+          name: 'user2',
+          avatar: 'https://picsum.photos/640/480',
+          introduction: 'Just a fake user passing thru...',
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ],
       {}
     )
 
     queryInterface.bulkInsert(
-      'Users',
-      Array.from({ length: 8 }).map(d => ({
-        email: faker.internet.email(),
-        password: bcrypt.hashSync('12345678', bcrypt.genSaltSync(10), null),
-        role: 'user',
-        name: faker.name.firstName(),
-        avatar: 'https://picsum.photos/640/480',
-        introduction: faker.lorem.text(),
-        createdAt: new Date(),
-        updatedAt: new Date()
-      }))
-    )
-
-    queryInterface.bulkInsert(
       'Tweets',
-      Array.from({ length: 30 }).map(d => ({
+      Array.from({ length: 5 }).map(d => ({
         description: faker.lorem.text(),
-        UserId: Math.floor(Math.random() * 10) + 1,
+        UserId: Math.floor(Math.random() * 3) + 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }))
@@ -58,9 +54,9 @@ module.exports = {
 
     queryInterface.bulkInsert(
       'Replies',
-      Array.from({ length: 30 }).map(d => ({
-        UserId: Math.floor(Math.random() * 10) + 1,
-        TweetId: Math.floor(Math.random() * 30) + 1,
+      Array.from({ length: 5 }).map(d => ({
+        UserId: Math.floor(Math.random() * 3) + 1,
+        TweetId: Math.floor(Math.random() * 5) + 1,
         comment: faker.lorem.text(),
         createdAt: new Date(),
         updatedAt: new Date()
@@ -69,9 +65,9 @@ module.exports = {
 
     return queryInterface.bulkInsert(
       'Likes',
-      Array.from({ length: 30 }).map(d => ({
-        UserId: Math.floor(Math.random() * 10) + 1,
-        TweetId: Math.floor(Math.random() * 30) + 1,
+      Array.from({ length: 5 }).map(d => ({
+        UserId: Math.floor(Math.random() * 3) + 1,
+        TweetId: Math.floor(Math.random() * 5) + 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }))
