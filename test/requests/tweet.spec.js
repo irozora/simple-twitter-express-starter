@@ -142,7 +142,7 @@ describe('# tweet request', () => {
     })
   })
 
-  context('# iike', () => {
+  context('# like', () => {
     describe('like first tweet', () => {
       before(async () => {
         this.ensureAuthenticated = sinon.stub(helpers, 'ensureAuthenticated').returns(true)
@@ -151,8 +151,8 @@ describe('# tweet request', () => {
         await db.Tweet.create({ UserId: 1, description: '' })
       })
 
-      it('will redirect index', done => {
-        request(app)
+      it('will redirect index', (done) => {
+         request(app)
           .post('/tweets/1/like')
           .set('Accept', 'application/json')
           .expect(302)

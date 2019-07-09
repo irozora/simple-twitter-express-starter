@@ -155,7 +155,7 @@ describe('# user request', () => {
             return done()
           })
       })
-      it('Followings list ordered by desc', done => {
+      it('followings list ordered by desc', (done) => {
         request(app)
           .get('/users/1/followings')
           .set('Accept', 'application/json')
@@ -180,16 +180,16 @@ describe('# user request', () => {
             return done()
           })
       })
-      it('follower list ordered by desc', done => {
+      it('followers list ordered by desc', (done) => {
         request(app)
           .get('/users/1/followings')
           .set('Accept', 'application/json')
           .expect(200)
           .end(function(err, res) {
-            if (err) return done(err)
+            if (err) return done(err);
             res.text.indexOf('User3').should.above(res.text.indexOf('User2'))
-            return done()
-          })
+            return done();
+          });
       })
     })
 
