@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development node app.js",
-    "dev": "cross-env NODE_ENV=development nodemon app.js",
-    "test": "cross-env NODE_ENV=test mocha test/*/*.js --exit --recursive --timeout 5000"
+    "start": "NODE_ENV=development node app.js",
+    "dev": "NODE_ENV=development nodemon app.js",
+    "test": "NODE_ENV=test mocha test/*/*.js --exit --recursive --timeout 5000"
   },
   "author": "",
   "license": "ISC",
