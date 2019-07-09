@@ -67,15 +67,15 @@ module.exports = {
       }))
     )
 
-    queryInterface.bulkInsert(
-      'Followships',
-      Array.from({ length: 20 }).map(d => ({
-        followerId: Math.floor(Math.random() * 10) + 1,
-        followingId: Math.floor(Math.random() * 10) + 1,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      }))
-    )
+    // queryInterface.bulkInsert(
+    //   'Followships',
+    //   Array.from({ length: 20 }).map(d => ({
+    //     followerId: Math.floor(Math.random() * 10) + 1,
+    //     followingId: Math.floor(Math.random() * 10) + 1,
+    //     createdAt: new Date(),
+    //     updatedAt: new Date()
+    //   }))
+    // )
 
     return queryInterface.bulkInsert(
       'Likes',
@@ -92,7 +92,7 @@ module.exports = {
     queryInterface.bulkDelete('Users', null, {})
     queryInterface.bulkDelete('Tweets', null, {})
     queryInterface.bulkDelete('Replies', null, {})
-    queryInterface.bulkDelete('Followships', null, {})
+    // queryInterface.bulkDelete('Followships', null, {})
     return queryInterface.bulkDelete('Likes', null, {})
   }
 }

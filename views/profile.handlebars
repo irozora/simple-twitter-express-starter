@@ -48,7 +48,7 @@
       </form>
       {{else}}
       <form action="/followships" method="POST">
-        <input type="hidden" name="UserId" value="{{user.id}}">
+        <input type="hidden" name="id" value="{{user.id}}">
         <button type="submit" class="Button-secondary" style="border-radius:0">Follow</button>
       </form>
       {{/if}}

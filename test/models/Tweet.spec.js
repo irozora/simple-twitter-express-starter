@@ -1,8 +1,8 @@
 process.env.NODE_ENV = 'test'
 
-var chai = require('chai');
-var sinon = require('sinon');
-chai.use(require('sinon-chai'));
+var chai = require('chai')
+var sinon = require('sinon')
+chai.use(require('sinon-chai'))
 
 const { expect } = require('chai')
 const {
@@ -17,10 +17,8 @@ const db = require('../../models')
 const TweetModel = require('../../models/tweet')
 
 describe('# Tweet Model', () => {
-  
   before(done => {
     done()
-
   })
 
   const Tweet = TweetModel(sequelize, dataTypes)
@@ -28,8 +26,7 @@ describe('# Tweet Model', () => {
   checkModelName(Tweet)('Tweet')
 
   context('properties', () => {
-    ;[
-    ].forEach(checkPropertyExists(like))
+    ;[].forEach(checkPropertyExists(like))
   })
 
   context('associations', () => {
@@ -42,52 +39,51 @@ describe('# Tweet Model', () => {
       Tweet.associate({ User })
     })
 
-    it('should have many replies', (done) => {
+    it('should have many replies', done => {
       expect(Tweet.hasMany).to.have.been.calledWith(Reply)
       done()
     })
-    it('should have many likes', (done) => {
+    it('should have many likes', done => {
       expect(Tweet.hasMany).to.have.been.calledWith(Like)
       done()
     })
-    it('should belong to user', (done) => {
+    it('should belong to user', done => {
       expect(Tweet.belongsTo).to.have.been.calledWith(User)
       done()
     })
   })
 
   context('action', () => {
-
     let data = null
 
-    it('create', (done) => {
-      db.Tweet.create({}).then((like) => {   
+    it('create', done => {
+      // Add UserId and description
+      db.Tweet.create({ UserId: 1, description: 'hi' }).then(like => {
         data = like
         done()
       })
     })
-    it('read', (done) => {
-        db.Tweet.findByPk(data.id).then((like) => {  
-          expect(data.id).to.be.equal(like.id)
-          done()
-        })
+    it('read', done => {
+      db.Tweet.findByPk(data.id).then(like => {
+        expect(data.id).to.be.equal(like.id)
+        done()
+      })
     })
-    it('update', (done) => {
-      db.Tweet.update({}, { where: { id: data.id }}).then(() => {
-        db.Tweet.findByPk(data.id).then((like) => { 
-          expect(data.updatedAt).to.be.not.equal(like.updatedAt) 
+    it('update', done => {
+      db.Tweet.update({}, { where: { id: data.id } }).then(() => {
+        db.Tweet.findByPk(data.id).then(like => {
+          expect(data.updatedAt).to.be.not.equal(like.updatedAt)
           done()
         })
       })
     })
-    it('delete', (done) => {
-      db.Tweet.destroy({ where: { id: data.id }}).then(() => {
-        db.Tweet.findByPk(data.id).then((like) => { 
-          expect(like).to.be.equal(null) 
+    it('delete', done => {
+      db.Tweet.destroy({ where: { id: data.id } }).then(() => {
+        db.Tweet.findByPk(data.id).then(like => {
+          expect(like).to.be.equal(null)
           done()
         })
       })
     })
   })
-
 })

@@ -112,7 +112,7 @@ const userController = {
           .Followings.map(d => d.id)
           .includes(following.id)
       }))
-      followingList = followingList.sort((a, b) => b.Followship.createdAt - a.Followship.createdAt).reverse()
+      followingList = followingList.sort((a, b) => b.Followship.createdAt - a.Followship.createdAt)
       res.render('followings', {
         user: user,
         isFollowed: isFollowed,
@@ -138,7 +138,7 @@ const userController = {
           .Followings.map(d => d.id)
           .includes(follower.id)
       }))
-      followedList = followedList.sort((a, b) => b.Followship.createdAt - a.Followship.createdAt).reverse()
+      followedList = followedList.sort((a, b) => b.Followship.createdAt - a.Followship.createdAt)
 
       res.render('followers', {
         user: user,
