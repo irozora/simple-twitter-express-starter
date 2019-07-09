@@ -11,7 +11,7 @@ describe('# followship request', () => {
     describe('when user1 wants to follow user2', () => {
       before(async () => {
         this.ensureAuthenticated = sinon.stub(helpers, 'ensureAuthenticated').returns(true)
-        this.getUser = sinon.stub(helpers, 'getUser').returns({ id: 1, Following: [] })
+        this.getUser = sinon.stub(helpers, 'getUser').returns({ id: 1, Followings: [] })
         await db.User.destroy({ where: {}, truncate: true })
         await db.Followship.destroy({ where: {}, truncate: true })
         await db.User.create({})
@@ -25,17 +25,13 @@ describe('# followship request', () => {
           .set('Accept', 'application/json')
           .expect(200)
           .end(function(err, res) {
-            if (err) return done(err)
-            db.User.findByPk(1, {
-              include: [
-                // revise table name
+            if (err) return done(err);
+            db.User.findByPk(1,{include: [
                 { model: db.User, as: 'Followers' },
-                { model: db.User, as: 'Followings' }
-              ]
-            }).then(user => {
-              // revise table name
+                { model: db.User, as: 'Followings' } 
+              ]}).then(user => {
               user.Followings.length.should.equal(0)
-              return done()
+              return done();
             })
           })
       })
@@ -47,17 +43,13 @@ describe('# followship request', () => {
           .set('Accept', 'application/json')
           .expect(302)
           .end(function(err, res) {
-            if (err) return done(err)
-            db.User.findByPk(1, {
-              include: [
-                // revise table name
+            if (err) return done(err);
+            db.User.findByPk(1,{include: [
                 { model: db.User, as: 'Followers' },
-                { model: db.User, as: 'Followings' }
-              ]
-            }).then(user => {
-              // revise table name
+                { model: db.User, as: 'Followings' } 
+              ]}).then(user => {
               user.Followings.length.should.equal(1)
-              return done()
+              return done();
             })
           })
       })
@@ -75,7 +67,7 @@ describe('# followship request', () => {
     describe('when user1 wants to unfollow user2', () => {
       before(async () => {
         this.ensureAuthenticated = sinon.stub(helpers, 'ensureAuthenticated').returns(true)
-        this.getUser = sinon.stub(helpers, 'getUser').returns({ id: 1, Following: [] })
+        this.getUser = sinon.stub(helpers, 'getUser').returns({ id: 1, Followings: [] })
         await db.User.destroy({ where: {}, truncate: true })
         await db.Followship.destroy({ where: {}, truncate: true })
         await db.User.create({})
@@ -89,17 +81,13 @@ describe('# followship request', () => {
           .set('Accept', 'application/json')
           .expect(302)
           .end(function(err, res) {
-            if (err) return done(err)
-            db.User.findByPk(1, {
-              include: [
-                // revise table name
+            if (err) return done(err);
+            db.User.findByPk(1,{include: [
                 { model: db.User, as: 'Followers' },
-                { model: db.User, as: 'Followings' }
-              ]
-            }).then(user => {
-              // revise table name
+                { model: db.User, as: 'Followings' } 
+              ]}).then(user => {
               user.Followings.length.should.equal(0)
-              return done()
+              return done();
             })
           })
       })
