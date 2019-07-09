@@ -4,18 +4,7 @@ const helpers = require('../_helpers')
 
 const tweetController = {
   getTweet: async (req, res) => {
-    let whereQuery = {}
-    const findFollowings = await Followship.findAll({
-      where: { followerId: helpers.getUser(req).id }
-    })
-    const followingsId = findFollowings.map(f => f.followingId)
-
-    whereQuery['UserId'] = findFollowings.length > 0 ? [followingsId, helpers.getUser(req).id] : helpers.getUser(req).id
-
-    findFollowings.forEach(f => followingsId.push(f.followingId))
-
     const tweets = await Tweet.findAll({
-      where: whereQuery,
       include: [User, Reply, { model: User, as: 'LikedUsers' }],
       order: [['createdAt', 'DESC']]
     })
